@@ -6,9 +6,8 @@
 
 啥也不说，先上图
 **Innodb内存结构和磁盘结构图：**
-![Innodb内存结构和磁盘结构](https://img-blog.csdnimg.cn/20201221162318506.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDk3NTI5MQ==,size_16,color_FFFFFF,t_70#pic_center)
-**更新流程图：**
-![update流程图](https://img-blog.csdnimg.cn/20201221163022842.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDk3NTI5MQ==,size_16,color_FFFFFF,t_70)
+
+![Innodb内存结构和磁盘结构](image/20201221162318506.jpg)
 
 ## 1. Buffer Pool（缓冲池）
 首先，Innodb的数据都是放在磁盘上的，如果直接操作磁盘的话，那速度太慢了。所以Innodb提供了一个缓冲池的技术，就把数据通过缓冲池进行交互。当我们进行增删改的时候需要先看下缓冲池中有没有，如果有直接修改，如果没有还需要将数据从磁盘中读到缓冲池中。然后在这个缓冲池中进行修改。
@@ -22,8 +21,11 @@ Buffer Pool主要分为3个部分：buffer pool、change buffer、adaptive hash 
 - 缓存页：buffer pool中存放的数据页，我们叫做缓存页。每一个缓存也都有一个自己的描述信息，包含这个数据也对应的表空间，数据页的编号，这个缓存也在buffer pool中的地址等等。这个描述信息本身也是一块数据。
 
 具体大概长这个样子：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2020122418281433.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDk3NTI5MQ==,size_16,color_FFFFFF,t_70)
+
+![在这里插入图片描述](image/2020122418281433.png)
+
 **查看buffer pool的相关信息** 
+
 ```sql
 show status like '%innodb_buffer_pool%'
 ```
@@ -31,6 +33,7 @@ show status like '%innodb_buffer_pool%'
 同时我也知道Buffer Pool默认大小128M，这个是可以调整的。
 
 **查看buffer_pool系统参数**
+
 ```sql
 show variables like '%innodb_buffer_pool%'
 ```
@@ -43,18 +46,20 @@ Innodb是通过LRU算法来管理缓冲池的。
 
 **那么普通的LRU算法能不能直接使用呢？会带来什么样的问题？**
 1. 第一种情况：在MySQL中有一个预读机制，当你从磁盘加载一个数据页的时候，他可能会将这个数据也的相邻的其他数据页都加载到缓存中。
-如图所示：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201226231103862.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDk3NTI5MQ==,size_16,color_FFFFFF,t_70#pic_center)
+如图所示：		
+![在这里插入图片描述](image/20201226231103862.png)
 当我们进行淘汰的时候尾部的，被人访问的数据缓存也被淘汰了。而没有被人访问的却还是链表中。
 
 2. 第二种情况：全表扫描。比如说：
-select * from table1;
-这样的语句会将表中所有的数据都加载到缓存中，后续却不在访问这些数据。而在之前经常会访问的数据会被推到LRU链表的尾部，当需要刷盘的时候却将被访问被访问的数据刷到了磁盘，不被访问的数据却还在LRU链表中。
+  select * from table1;
+  这样的语句会将表中所有的数据都加载到缓存中，后续却不在访问这些数据。而在之前经常会访问的数据会被推到LRU链表的尾部，当需要刷盘的时候却将被访问被访问的数据刷到了磁盘，不被访问的数据却还在LRU链表中。
 
 所以MySQL对LRU进行了优化，将其拆分为两部分：一部分是热数据，一部分是冷数据。比例由innodb_old_blocks_pct这个参数控制，默认为37，也就是表示冷数据占比37%
 如图所示：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201226232247718.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDk3NTI5MQ==,size_16,color_FFFFFF,t_70#pic_center)
+
+![在这里插入图片描述](image/20201226232247718.png)
 1.当我们加载数据的时候会加载到冷数据区的头部
+
 2. 如果经常被访问的数据会往热数据区移动
 3. 不经常访问的，慢慢的往冷数据区移动
 4. 当刷盘的时候，直接将冷数据区尾部的数据通过一个后台线程定时的刷到磁盘中
@@ -109,9 +114,12 @@ show variables like 'innodb_flush_log_at_trx_commit';
 由内部系统表组成，存储表和索引的元数据（定义信息）。
 
 #### 2.1.2 doublewrite buffer（双写缓冲）
+
 我们知道innodb数据页的大小是16kb，而操作系统页的大小为4kb，当写数据页的时候是4k，4k的写。如图所示：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201226204740827.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDk3NTI5MQ==,size_16,color_FFFFFF,t_70#pic_center)
-如果在写到一半的时候，比如写了8k，数据服务宕机了。数据页只写了一部分，这个时候数据是不完整的。这种情况叫做部分写失效（parital page write）。为了解决这个问题，innodb设计了一个双写缓冲区来解决这个问题。
+
+![在这里插入图片描述](image/20201226204740827.png)
+
+。为了解决这个问题，innodb设计了一个双写缓冲区来解决这个问题。
 
 当进行刷脏的时候，会写两遍到磁盘上，第一遍是写到doublewrite buffer，第二遍是从doublewrite buffer写到真正的数据文件中。如果发生了宕机等问题的时候，InnoDB再次启动后，发现了其中一个数据页已经损坏或者不完整，那么此时就可以从doublewrite buffer中进行数据恢复了。
 
@@ -162,7 +170,7 @@ drop tablespace gts2673;
 ```sql
 show variables like 'innodb_log%';
 ```
-![redo log参数](https://img-blog.csdnimg.cn/20201226193835391.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDk3NTI5MQ==,size_16,color_FFFFFF,t_70#pic_center)
+![redo log参数](image/20201226193835391.png)
 | 值                        | 含义                                                  |
 | :------------------------ | :---------------------------------------------------- |
 | innodb_log_file_size      | 指定每个文件的大小，默认48M                           |
@@ -170,7 +178,8 @@ show variables like 'innodb_log%';
 | innodb_log_group_home_dir | 指定文件所在路径，相对或绝对。如果不指定，则为datadir |
 
 Innodb的redo log是固定大小的，比如可以配置一组4个文件，每个文件的大小是1Gb，公共就是可以记录4GB的大小，如果写完了那么就会从头开始重新写。具体可以如图所示（来自极客时间-MySQL实战45讲）：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201226202404907.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDk3NTI5MQ==,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](image/20201226202404907.png)
+
 - write pos是当前记录的位置，一边写一边往后移动，写到第3个文件的末尾就会回到0号文件的开头。
 - check point是当前要擦除的位置，也是往后移并且循环，擦除记录前要把记录更新到数据文件中。
 - write pos和check point之间的空着的部分，可以用来记录新的操作。如果write pos追上了check point，这个时候就不能在执行新的更新，得停下来先擦掉一些记录，把check point往前推进后才能继续。
@@ -186,7 +195,7 @@ binlog以事件的形式记录了所有的DDL和DML语句，可以用来做主�
 在开启了binlog功能的情况下，我们可以把binlog导出成SQL语句，把所有的操作重放一遍，来实现数据恢复。
 
 binlog的另一个功能就是用来实现主从复制，原理如图：
-![主从复制原理](https://img-blog.csdnimg.cn/20201225083656600.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDk3NTI5MQ==,size_16,color_FFFFFF,t_70)
+![主从复制原理](image/20201225083656600.png)
 
 **注意：**
 - 从库读取binlog日志，写relay日志，再将日志读取到本地，这个操作是串行化的。

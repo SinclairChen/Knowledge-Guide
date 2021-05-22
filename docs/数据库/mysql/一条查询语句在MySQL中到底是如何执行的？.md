@@ -2,7 +2,7 @@
 如果我们要执行一条查询语句，那么它到底在MySQL中是如何执行的呢？
 
 先给出MySQL的逻辑架构图。（来自：极客时间-MySQL实战45讲）
-![MySQL的逻辑架构图](https://img-blog.csdnimg.cn/20201218144618843.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDk3NTI5MQ==,size_16,color_FFFFFF,t_70#pic_center)
+![MySQL的逻辑架构图](image/20201218144618843.png)
 从上图我们知道，如果我们要使用MySQL首先第一步肯定是和它建立连接。
 
 ## 1. 连接器
@@ -66,7 +66,7 @@ show global variables like 'interactive_timeout'; - 交互式超时间，如数�
 ```sql
 show global status like 'Thread%';
 ```
- ![在这里插入图片描述](https://img-blog.csdnimg.cn/2020121815235295.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDk3NTI5MQ==,size_16,color_FFFFFF,t_70#pic_center)
+ ![在这里插入图片描述](image/2020121815235295.png)
  1. Threads_cached：缓存中的线程连接数
  2. Threads_connected：当前打开的连接数
  3. Threads_created：为处理连接创建的连接数
@@ -76,16 +76,16 @@ show global status like 'Thread%';
 ```sql
 show processlist;
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201218153437527.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDk3NTI5MQ==,size_16,color_FFFFFF,t_70#pic_center)
-具体command状态参考官方文档：[command状态文档](https://dev.mysql.com/doc/refman/5.7/en/thread-commands.html)
+![在这里插入图片描述](image/20201218153437527.png)
 
 **查询最大连接数**
 在5.7的版本中最大的默认连接数是151个，可以修改最大值为16384（2^14）
 ```sql
 show variables like 'max_connections';
 ```
-![mysql默认的最大连接数](https://img-blog.csdnimg.cn/20201218154040173.png#pic_center)
+![mysql默认的最大连接数](image/20201218154040173.png)
 **show参数说明**
+
 - 级别：默认为session级别，如果要设置为全局需要添加上global
 
 **set参数说明**
@@ -129,7 +129,7 @@ select * from t where id = 1;
 select name from user where age > 10 and id = 1;
 ```
 就会被生成如图所示的解析树：
-![select语句解析树](https://img-blog.csdnimg.cn/20201218171757127.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDk3NTI5MQ==,size_16,color_FFFFFF,t_70#pic_center)
+![select语句解析树](image/20201218171757127.png)
 
 ### 3.2 预处理
 如果这条SQL的单词和语法都没有错误，但是MySQL中没有这张表或者没有这个字段怎么办呢？
