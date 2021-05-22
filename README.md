@@ -6,4 +6,9 @@
 - Github：https://github.com/SinclairChen/Knowledge-Guide
 - 码云：https://github.com/SinclairChen/Knowledge-Guide
 
+## 基础
+1. [java基础知识](./docs/java)
+2. [java基础知识难点](./docs/java)
+
+
 
