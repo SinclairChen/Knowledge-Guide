@@ -1,4 +1,44 @@
+如果你不知道该学习什么的话，请看 [Java 学习线路图是怎样的？]( https://www.zhihu.com/question/56110328/answer/869069586)  （原创不易，欢迎点赞），这是 2021 最新最完善的 Java 学习路线！
 
+👍推荐 [在线阅读](https://snailclimb.gitee.io/javaguide)  (Github 访问速度比较慢可能会导致部分图片无法刷新出来) 
+
+👍推荐[2021最新实战项目源码下载](https://mp.weixin.qq.com/s?__biz=Mzg2OTA0Njk0OA==&mid=100018862&idx=1&sn=858e00b60c6097e3ba061e79be472280&chksm=4ea1856579d60c73224e4d852af6b0188c3ab905069fc28f4b293963fd1ee55d2069fb229848#rd)
+
+书单已经被移动到[awesome-cs](https://github.com/CodingDocs/awesome-cs) 这个仓库。
+
+> 1. **介绍**：关于 JavaGuide 的相关介绍请看：[关于 JavaGuide 的一些说明](https://www.yuque.com/snailclimb/dr6cvl/mr44yt) 。
+> 2. **PDF版本** ： [《JavaGuide 面试突击版》PDF 版本](#公众号) 。[图解计算机基础 PDF 版](#优质原创PDF资源)。
+> 3. **知识星球** :  简历指导/Java学习/面试指导/面试小册。欢迎加入[我的知识星球](https://mp.weixin.qq.com/s?__biz=Mzg2OTA0Njk0OA==&mid=100015911&idx=1&sn=2e8a0f5acb749ecbcbb417aa8a4e18cc&chksm=4ea1b0ec79d639fae37df1b86f196e8ce397accfd1dd2004bcadb66b4df5f582d90ae0d62448#rd) 。星球内部更新的[《Java面试进阶指北  打造个人的技术竞争力》](https://www.yuque.com/docs/share/f37fc804-bfe6-4b0d-b373-9c462188fec7)这个小册的质量很高，专为面试打造。
+> 4. **面试专版** ：准备面试的小伙伴可以考虑面试专版：[《Java 面试进阶指南》](https://xiaozhuanlan.com/javainterview?rel=javaguide) 
+> 6. **转载须知** ：以下所有文章如非文首说明皆为我（Guide哥）的原创，转载在文首注明出处，如发现恶意抄袭/搬运，会动用法律武器维护自己的权益。让我们一起维护一个良好的技术创作环境！⛽️
+
+<p align="center">
+<a href="https://github.com/Snailclimb/JavaGuide" target="_blank">
+	<img src="https://img-blog.csdnimg.cn/img_convert/1c00413c65d1995993bf2b0daf7b4f03.png#pic_center" width=""/>
+</a>
+</p>
+<p align="center">
+  <a href="https://snailclimb.gitee.io/javaguide"><img src="https://img.shields.io/badge/阅读-read-brightgreen.svg" alt="阅读"></a>
+  <a href="#公众号"><img src="https://img.shields.io/badge/%E5%85%AC%E4%BC%97%E5%8F%B7-JavaGuide-lightgrey.svg" alt="公众号"></a>
+  <a href="#公众号"><img src="https://img.shields.io/badge/PDF-Java面试突击-important.svg" alt="公众号"></a>
+  <a href="#投稿"><img src="https://img.shields.io/badge/support-投稿-critical.svg" alt="投稿"></a>
+  <img src="https://img.shields.io/github/stars/Snailclimb/JavaGuide" alt="投稿">
+  <a href="https://xiaozhuanlan.com/javainterview?rel=javaguide"><img src="https://img.shields.io/badge/Java-面试指南-important" alt="投稿"></a>
+</p>
+
+
+<h3 align="center">Sponsor</h3>
+
+<table>
+  <tbody>
+    <tr>
+       <td align="center" valign="middle">
+        <a href="https://t.1yb.co/iskv">
+         <img src="./media/sponsor/知识星球.png" style="margin: 0 auto;width:850px" /></a>
+      </td>       
+    </tr>
+  </tbody>
+</table>
 
 ## Java
 
@@ -190,6 +230,13 @@ CAP 也就是 Consistency（一致性）、Availability（可用性）、Partiti
 
 关于 BASE 的详细解读请看：[《BASE理论解读》](docs/system-design/distributed-system/BASE理论.md)。
 
+#### Paxos 算法和 Raft 算法
+
+**Paxos 算法**诞生于 1990 年，这是一种解决分布式系统一致性的经典算法 。但是，由于 Paxos 算法非常难以理解和实现，不断有人尝试简化这一算法。到了2013 年才诞生了一个比 Paxos 算法更易理解和实现的分布式一致性算法—**Raft 算法**。
+
+#### 搜索引擎
+
+用于提高搜索效率，功能和浏览器搜索引擎类似。比较常见的搜索引擎是 Elasticsearch（推荐） 和 Solr。
 
 #### RPC
 
@@ -206,6 +253,16 @@ Dubbo 是一款国产的 RPC 框架，由阿里开源。相关阅读：
 
 1. [为什么要网关？你知道有哪些常见的网关系统？](docs/system-design/distributed-system/api-gateway/为什么要网站有哪些常见的网站系统.md)
 2. [如何设计一个亿级网关(API Gateway)？](docs/system-design/distributed-system/api-gateway/如何设计一个亿级网关.md)
+
+#### 分布式 id
+
+在复杂分布式系统中，往往需要对大量的数据和消息进行唯一标识。比如数据量太大之后，往往需要对进行对数据进行分库分表，分库分表后需要有一个唯一 ID 来标识一条数据或消息，数据库的自增 ID 显然不能满足需求。相关阅读：[为什么要分布式 id ？分布式 id 生成方案有哪些？](docs/system-design/micro-service/分布式id生成方案总结.md)
+
+#### 分布式事务
+
+**分布式事务就是指事务的参与者、支持事务的服务器、资源服务器以及事务管理器分别位于不同的分布式系统的不同节点之上。**
+
+简单的说，就是一次大的操作由不同的小操作组成，这些小的操作分布在不同的服务器上，且属于不同的应用，分布式事务需要保证这些小操作要么全部成功，要么全部失败。本质上来说，分布式事务就是为了保证不同数据库的数据一致性。
 
 ### 微服务
 
@@ -234,6 +291,53 @@ Dubbo 是一款国产的 RPC 框架，由阿里开源。相关阅读：
 
 相关阅读： [读写分离&分库分表常见问题总结](docs/system-design/读写分离&分库分表.md)
 
+#### 负载均衡
+
+负载均衡系统通常用于将任务比如用户请求处理分配到多个服务器处理以提高网站、应用或者数据库的性能和可靠性。
+
+常见的负载均衡系统包括 3 种：
+
+1. **DNS 负载均衡** ：一般用来实现地理级别的均衡。
+2. **硬件负载均衡** ： 通过单独的硬件设备比如 F5 来实现负载均衡功能（硬件的价格一般很贵）。
+3. **软件负载均衡** ：通过负载均衡软件比如 Nginx 来实现负载均衡功能。
+
+### 高可用
+
+高可用描述的是一个系统在大部分时间都是可用的，可以为我们提供服务的。高可用代表系统即使在发生硬件故障或者系统升级的时候，服务仍然是可用的 。
+
+相关阅读： **《[如何设计一个高可用系统？要考虑哪些地方？](docs/system-design/high-availability/如何设计一个高可用系统要考虑哪些地方.md)》** 。
+
+#### 限流
+
+限流是从用户访问压力的角度来考虑如何应对系统故障。
+
+限流为了对服务端的接口接受请求的频率进行限制，防止服务挂掉。比如某一接口的请求限制为 100 个每秒, 对超过限制的请求放弃处理或者放到队列中等待处理。限流可以有效应对突发请求过多。相关阅读：[限流算法有哪些？](docs/system-design/high-availability/limit-request.md)
+
+#### 降级
+
+降级是从系统功能优先级的角度考虑如何应对系统故障。
+
+服务降级指的是当服务器压力剧增的情况下，根据当前业务情况及流量对一些服务和页面有策略的降级，以此释放服务器资源以保证核心任务的正常运行。
+
+#### 熔断
+
+熔断和降级是两个比较容易混淆的概念，两者的含义并不相同。
+
+降级的目的在于应对系统自身的故障，而熔断的目的在于应对当前系统依赖的外部系统或者第三方系统的故障。
+
+#### 排队
+
+另类的一种限流，类比于现实世界的排队。玩过英雄联盟的小伙伴应该有体会，每次一有活动，就要经历一波排队才能进入游戏。
+
+#### 集群
+
+相同的服务部署多份，避免单点故障。
+
+#### 超时和重试机制
+
+**一旦用户的请求超过某个时间得不到响应就结束此次请求并抛出异常。** 如果不进行超时设置可能会导致请求响应速度慢，甚至导致请求堆积进而让系统无法在处理请求。
+
+另外，重试的次数一般设为 3 次，再多次的重试没有好处，反而会加重服务器压力（部分场景使用失败重试机制会不太适合）。
 
 ### 大型网站架构
 
@@ -255,3 +359,42 @@ Dubbo 是一款国产的 RPC 框架，由阿里开源。相关阅读：
 4. [Java 还是大数据，你需要了解这些东西！](docs/questions/java-big-data.md)
 
 ---
+
+## 其他
+
+### 贡献者
+
+[你可以点此链接查看JavaGuide的所有贡献者。](https://github.com/Snailclimb/JavaGuide/graphs/contributors) 感谢你们让 JavaGuide 变得更好！如果你们来到武汉一定要找我，我请你们吃饭玩耍。
+
+*悄悄话：JavaGuide 会不定时为贡献者们送福利。*
+
+### 待办
+
+- [ ] 数据结构总结重构
+
+### 优质原创PDF资源
+
+![](https://cdn.jsdelivr.net/gh/javaguide-tech/blog-images-2@main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A/image-20201027160348395.png)
+
+为了避免恶意传播，微信搜“**Github掘金计划**”后台回复 **“006”** 即可获取。
+
+<img src="https://cdn.jsdelivr.net/gh/javaguide-tech/blog-images-2@main/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/qrcode_for_gh_8b9b6034ac19_258.jpg" style="text-align:right"/>
+
+### 捐赠支持
+
+项目的发展离不开你的支持，如果 JavaGuide 帮助到了你找到自己满意的 offer，请作者喝杯咖啡吧 ☕ 后续会继续完善更新！加油！
+
+[点击捐赠支持作者](https://www.yuque.com/snailclimb/dr6cvl/mr44yt#vu3ok)
+
+### 联系我
+
+<img src="https://cdn.jsdelivr.net/gh/javaguide-tech/blog-images-3@main/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/31603935587_.pic_hd.jpg" style="zoom:67%;" />
+
+### 公众号
+
+如果大家想要实时关注我更新的文章以及分享的干货的话，可以关注我的公众号“**JavaGuide**”。
+
+**《Java 面试突击》:** 由本文档衍生的专为面试而生的《Java 面试突击》V4.0 PDF 版本[公众号](#公众号)后台回复 **"面试突击"** 即可领取！
+
+![我的公众号](https://cdn.jsdelivr.net/gh/javaguide-tech/blog-images/2020-08/167598cd2e17b8ec.png)
+
