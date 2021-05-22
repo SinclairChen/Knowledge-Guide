@@ -171,6 +171,9 @@ drop tablespace gts2673;
 show variables like 'innodb_log%';
 ```
 ![redo log参数](image/20201226193835391.png)
+
+
+
 | 值                        | 含义                                                  |
 | :------------------------ | :---------------------------------------------------- |
 | innodb_log_file_size      | 指定每个文件的大小，默认48M                           |
