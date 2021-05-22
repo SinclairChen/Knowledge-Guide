@@ -1,7 +1,5 @@
 
 * Java
-
-  * java基础
   
     * [Java基础](./docs/java/基础/Java基础.md) 
     * [Java集合](./docs/java/b-2Java集合.md)
