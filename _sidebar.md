@@ -3,15 +3,11 @@
   
   * [Java基础](./docs/java/基础/Java基础.md) 
     
-  * 并发
-  
-    * [Java多线程](./docs/java/并发/b-3Java多线程.md)
+  * [java并发](./docs/java/并发/b-3Java多线程.md)
     
-  * jvm
+  * [jvm](./docs/java/jvm/b-4jvm.md)
   
-    * [jvm](./docs/java/jvm/b-4jvm.md)
-  
-  * 框架
+  * [框架](./docs/java/框架/)
   
     待更新...
 
