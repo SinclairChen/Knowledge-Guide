@@ -1,15 +1,257 @@
-# Knowledge-Guide
-这是一个个人知识点整理的文档
 
 
-- 在线阅读地址：https://sinclairchen.github.io/Knowledge-Guide/#/
-- Github：https://github.com/SinclairChen/Knowledge-Guide
-- 码云：https://github.com/SinclairChen/Knowledge-Guide
+## Java
 
-## 基础
-1. [java基础知识](./docs/java)
-2. [java基础知识难点](./docs/java)
+### 基础
+
+**知识点/面试题:**(必看:+1: )
+
+1. **[Java 基础知识](docs/java/basis/Java基础知识.md)**
+2. **[Java 基础知识疑难点/易错点](docs/java/basis/Java基础知识疑难点.md)**
+
+**重要知识点详解：**
+
+1. [枚举](docs/java/basis/用好Java中的枚举真的没有那么简单.md) （很重要的一个数据结构，用好枚举真的没有那么简单！）
+2. [Java 常见关键字总结：final、static、this、super!](docs/java/basis/Java常见关键字总结.md)
+3. [什么是反射机制？反射机制的应用场景有哪些？](docs/java/basis/反射机制.md)
+4. [代理模式详解：静态代理+JDK/CGLIB 动态代理实战](docs/java/basis/代理模式详解.md)
+5. [常见的 IO 模型有哪些？Java 中的 BIO、NIO、AIO 有啥区别?](docs/java/basis/IO模型.md)
+
+### 容器
+
+1. **[Java 容器常见问题总结](docs/java/collection/Java集合框架常见面试题.md)** (必看 :+1:)
+2. **源码分析** ：[ArrayList 源码+扩容机制分析](docs/java/collection/ArrayList源码+扩容机制分析.md) 、[LinkedList 源码](docs/java/collection/LinkedList源码分析.md) 、[HashMap(JDK1.8)源码+底层数据结构分析](<docs/java/collection/HashMap(JDK1.8)源码+底层数据结构分析.md>) 、[ConcurrentHashMap 源码+底层数据结构分析](docs/java/collection/ConcurrentHashMap源码+底层数据结构分析.md)
+
+### 并发
+
+**知识点/面试题:** (必看 :+1:)
+
+1. **[Java 并发基础常见面试题总结](docs/java/multi-thread/2020最新Java并发基础常见面试题总结.md)**
+2. **[Java 并发进阶常见面试题总结](docs/java/multi-thread/2020最新Java并发进阶常见面试题总结.md)**
+
+**重要知识点详解：**
+
+2. **线程池**：[Java 线程池学习总结](./docs/java/multi-thread/java线程池学习总结.md)、[拿来即用的线程池最佳实践](./docs/java/multi-thread/拿来即用的线程池最佳实践.md)
+4. [ ThreadLocal 关键字解析](docs/java/multi-thread/万字详解ThreadLocal关键字.md)
+5. [并发容器总结](docs/java/multi-thread/并发容器总结.md)
+6. [JUC 中的 Atomic 原子类总结](docs/java/multi-thread/Atomic原子类总结.md)
+7. [AQS 原理以及 AQS 同步组件总结](docs/java/multi-thread/AQS原理以及AQS同步组件总结.md)
+
+### JVM (必看 :+1:)
+
+1. **[Java 内存区域](docs/java/jvm/Java内存区域.md)**
+2. **[JVM 垃圾回收](docs/java/jvm/JVM垃圾回收.md)**
+3. [JDK 监控和故障处理工具](docs/java/jvm/JDK监控和故障处理工具总结.md)
+4. [类文件结构](docs/java/jvm/类文件结构.md)
+5. **[类加载过程](docs/java/jvm/类加载过程.md)**
+6. [类加载器](docs/java/jvm/类加载器.md)
+7. **[【待完成】最重要的 JVM 参数指南（翻译完善了一半）](docs/java/jvm/最重要的JVM参数指南.md)**
+9. **[【加餐】大白话带你认识 JVM](docs/java/jvm/[加餐]大白话带你认识JVM.md)**
+
+### 新特性
+
+1.  **Java 8** ：[Java 8 新特性总结](docs/java/new-features/Java8新特性总结.md)、[Java8常用新特性总结](docs/java/new-features/java8-common-new-features.md) 、[Java 8 学习资源推荐](docs/java/new-features/Java8教程推荐.md)、[Java8 forEach 指南](docs/java/new-features/Java8foreach指南.md)
+2.  **Java9~Java14** : [一文带你看遍 JDK9~14 的重要新特性！](./docs/java/new-features/一文带你看遍JDK9到14的重要新特性.md)
+
+## 网络
+
+1. [计算机网络常见面试题](docs/network/计算机网络.md)
+2. [计算机网络基础知识总结](docs/network/计算机网络知识总结.md)
+
+## 操作系统
+
+1. [操作系统常见问题总结！](docs/operating-system/basis.md)
+2. [后端程序员必备的 Linux 基础知识](docs/operating-system/linux.md)
+3. [Shell 编程入门](docs/operating-system/Shell.md)
+
+## 数据结构与算法
+
+### 数据结构
+
+- **图解数据结构：**
+  1. [线性数据结构 :数组、链表、栈、队列](docs/dataStructures-algorithms/data-structure/线性数据结构.md)
+  2. [图](docs/dataStructures-algorithms/data-structure/图.md)
+- [不了解布隆过滤器？一文给你整的明明白白！](docs/dataStructures-algorithms/data-structure/bloom-filter.md)
+
+### 算法
+
+算法这部分内容非常重要，如果你不知道如何学习算法的话，可以看下我写的：
+
+- [算法学习书籍+资源推荐](https://www.zhihu.com/question/323359308/answer/1545320858) 。
+- [如何刷Leetcode?](https://www.zhihu.com/question/31092580/answer/1534887374) 
+
+**常见算法问题总结：**
+
+- [几道常见的字符串算法题总结 ](docs/dataStructures-algorithms/几道常见的子符串算法题.md)
+- [几道常见的链表算法题总结 ](docs/dataStructures-algorithms/几道常见的链表算法题.md)
+- [剑指 offer 部分编程题](docs/dataStructures-algorithms/剑指offer部分编程题.md)
+
+## 数据库
+
+### MySQL
+
+**总结：**
+
+1. **[MySQL知识点总结](docs/database/MySQL.md)** (必看 :+1:)
+2. [阿里巴巴开发手册数据库部分的一些最佳实践](docs/database/阿里巴巴开发手册数据库部分的一些最佳实践.md)
+3. [一千行 MySQL 学习笔记](docs/database/一千行MySQL命令.md)
+4. [MySQL 高性能优化规范建议](docs/database/MySQL高性能优化规范建议.md)
+
+**重要知识点：**
+
+1. [MySQL数据库索引总结](docs/database/MySQL数据库索引.md)
+2. [事务隔离级别(图文详解)](<docs/database/事务隔离级别(图文详解).md>)
+3. [一条 SQL 语句在 MySQL 中如何执行的](docs/database/一条sql语句在mysql中如何执行的.md)
+4. [关于数据库中如何存储时间的一点思考](docs/database/关于数据库存储时间的一点思考.md)
+
+### Redis
+
+2. [Redis 常见问题总结](docs/database/Redis/redis-all.md)
+3. [面试/工作必备！3种常用的缓存读写策略！](docs/database/Redis/3种常用的缓存读写策略.md)
+
+## 系统设计
+
+### 系统设计必备基础
+
+#### RESTful API
+
+我们在进行后端开发的时候，主要的工作就是为前端或者其他后端服务提供 API 比如查询用户数据的 API 。RESTful API 是一种基于 REST 构建的 API，它是一种被设计的更好使用的 API。
+
+相关阅读：[RestFul API 简明教程](docs/system-design/coding-way/RESTfulAPI简明教程.md)
+
+#### 命名
+
+编程过程中，一定要重视命名。因为好的命名即是注释，别人一看到你的命名就知道你的变量、方法或者类是做什么的！
+
+相关阅读： [Java 命名之道](docs/system-design/naming.md) 。
+
+### 常用框架
+
+如果你没有接触过 Java Web 开发的话，可以先看一下我总结的 [《J2EE 基础知识》](docs/java/J2EE基础知识.md) 。虽然，这篇文章中的很多内容已经淘汰，但是可以让你对 Java 后台技术发展有更深的认识。
+
+#### Spring/SpringBoot (必看 :+1:)
+
+**知识点/面试题:** 
+
+1. **[Spring 常见问题总结](docs/system-design/framework/spring/Spring常见问题总结.md)**
+2. **[SpringBoot 入门指南](https://github.com/Snailclimb/springboot-guide)**
+3. **[面试常问：“讲述一下 SpringBoot 自动装配原理？”](https://www.cnblogs.com/javaguide/p/springboot-auto-config.html)**
+
+**重要知识点详解：**
+
+1. **[Spring/Spring Boot 常用注解总结！安排！](./docs/system-design/framework/spring/SpringBoot+Spring常用注解总结.md)** 
+2. **[Spring 事务总结](docs/system-design/framework/spring/Spring事务总结.md)** 
+3. [Spring 中都用到了那些设计模式?](docs/system-design/framework/spring/Spring-Design-Patterns.md)
+
+#### MyBatis
+
+- [MyBatis 常见面试题总结](docs/system-design/framework/mybatis/mybatis-interview.md)
+
+#### Netty (必看 :+1:)
+
+1. [剖析面试最常见问题之 Netty（上）](https://xiaozhuanlan.com/topic/4028536971)
+2. [剖析面试最常见问题之 Netty（下）](https://xiaozhuanlan.com/topic/3985146207)
+
+#### ZooKeeper
+
+> 前两篇文章可能有内容重合部分，推荐都看一遍。
+
+1. [【入门】ZooKeeper 相关概念总结](docs/system-design/distributed-system/zookeeper/zookeeper-intro.md)
+2. [【进阶】ZooKeeper 相关概念总结](docs/system-design/distributed-system/zookeeper/zookeeper-plus.md)
+3. [【实战】ZooKeeper 实战](docs/system-design/distributed-system/zookeeper/zookeeper-in-action.md)
+
+### 安全
+
+#### 认证授权
+
+**[《认证授权基础》](docs/system-design/authority-certification/basis-of-authority-certification.md)** 这篇文章中我会介绍认证授权常见概念： **Authentication**,**Authorization** 以及 **Cookie**、**Session**、Token、**OAuth 2**、**SSO** 。如果你不清楚这些概念的话，建议好好阅读一下这篇文章。
+
+- **JWT** ：JWT（JSON Web Token）是一种身份认证的方式，JWT 本质上就一段签名的 JSON 格式的数据。由于它是带有签名的，因此接收者便可以验证它的真实性。相关阅读：
+  - [JWT 优缺点分析以及常见问题解决方案](docs/system-design/authority-certification/JWT优缺点分析以及常见问题解决方案.md)
+  - [适合初学者入门 Spring Security With JWT 的 Demo](https://github.com/Snailclimb/spring-security-jwt-guide)
+
+- **SSO(单点登录)** ：**SSO(Single Sign On)** 即单点登录说的是用户登陆多个子系统的其中一个就有权访问与其相关的其他系统。举个例子我们在登陆了京东金融之后，我们同时也成功登陆京东的京东超市、京东家电等子系统。相关阅读：[**SSO 单点登录看这篇就够了！**](docs/system-design/authority-certification/SSO单点登录看这一篇就够了.md)
+
+#### 数据脱敏
+
+数据脱敏说的就是我们根据特定的规则对敏感信息数据进行变形，比如我们把手机号、身份证号某些位数使用 * 来代替。
+
+### 分布式
+
+#### CAP 理论
+
+CAP 也就是 Consistency（一致性）、Availability（可用性）、Partition Tolerance（分区容错性） 这三个单词首字母组合。
+
+关于 CAP 的详细解读请看：[《CAP理论解读》](docs/system-design/distributed-system/CAP理论.md)。
+
+#### BASE 理论
+
+**BASE** 是 **Basically Available（基本可用）** 、**Soft-state（软状态）** 和 **Eventually Consistent（最终一致性）** 三个短语的缩写。BASE 理论是对 CAP 中一致性和可用性权衡的结果，其来源于对大规模互联网系统分布式实践的总结，是基于 CAP 定理逐步演化而来的，它大大降低了我们对系统的要求。
+
+关于 BASE 的详细解读请看：[《BASE理论解读》](docs/system-design/distributed-system/BASE理论.md)。
 
 
+#### RPC
+
+RPC 让调用远程服务调用像调用本地方法那样简单。
+
+Dubbo 是一款国产的 RPC 框架，由阿里开源。相关阅读：
+
+- [Dubbo 常见问题总结](docs/system-design/distributed-system/rpc/Dubbo.md)
+- [服务之间的调用为啥不直接用 HTTP 而用 RPC？](docs/system-design/distributed-system/rpc/服务之间的调用为啥不直接用HTTP而用RPC.md)
+
+#### API 网关
+
+网关主要用于请求转发、安全认证、协议转换、容灾。
+
+1. [为什么要网关？你知道有哪些常见的网关系统？](docs/system-design/distributed-system/api-gateway/为什么要网站有哪些常见的网站系统.md)
+2. [如何设计一个亿级网关(API Gateway)？](docs/system-design/distributed-system/api-gateway/如何设计一个亿级网关.md)
+
+### 微服务
+
+1. [ 大白话入门 Spring Cloud](docs/system-design/micro-service/spring-cloud.md)
+2. [微服务/分布式大厂真实面试问题解答](https://xiaozhuanlan.com/topic/2895047136)
+
+### 高并发
+
+#### 消息队列
+
+消息队列在分布式系统中主要是为了解耦和削峰。相关阅读： [消息队列常见问题总结](docs/system-design/distributed-system/message-queue/message-queue.md)。
+
+1. **RabbitMQ** : [RabbitMQ 入门](docs/system-design/distributed-system/message-queue/RabbitMQ入门看这一篇就够了.md)
+2. **RocketMQ** : [RocketMQ 入门](docs/system-design/distributed-system/message-queue/RocketMQ.md)、[RocketMQ 的几个简单问题与答案](docs/system-design/distributed-system/message-queue/RocketMQ-Questions.md)
+3. **Kafka** ：[Kafka 常见问题总结](docs/system-design/distributed-system/message-queue/Kafka常见面试题总结.md)
+
+#### 读写分离&分库分表
+
+读写分离主要是为了将数据库的读和写操作分不到不同的数据库节点上。主服务器负责写，从服务器负责读。另外，一主一从或者一主多从都可以。
+
+读写分离可以大幅提高读性能，小幅提高写的性能。因此，读写分离更适合单机并发读请求比较多的场景。
+
+分库分表是为了解决由于库、表数据量过大，而导致数据库性能持续下降的问题。
+
+常见的分库分表工具有：`sharding-jdbc`（当当）、`TSharding`（蘑菇街）、`MyCAT`（基于 Cobar）、`Cobar`（阿里巴巴）...。 推荐使用 `sharding-jdbc`。 因为，`sharding-jdbc` 是一款轻量级 `Java` 框架，以 `jar` 包形式提供服务，不要我们做额外的运维工作，并且兼容性也很好。
+
+相关阅读： [读写分离&分库分表常见问题总结](docs/system-design/读写分离&分库分表.md)
 
 
+### 大型网站架构
+
+- [8 张图读懂大型网站技术架构](docs/system-design/website-architecture/8%20张图读懂大型网站技术架构.md)
+- [关于大型网站系统架构你不得不懂的 10 个问题](docs/system-design/website-architecture/关于大型网站系统架构你不得不懂的10个问题.md)
+
+## 工具
+
+1. **Java** ：[JAD 反编译](docs/java/JAD反编译tricks.md)、[手把手教你定位常见 Java 性能问题](./docs/java/手把手教你定位常见Java性能问题.md)
+2. **Git** ：[Git 入门](docs/tools/Git.md)
+3. **Github** ： [Github小技巧](docs/tools/Github技巧.md)
+4. **Docker** : [Docker 基本概念解读](docs/tools/Docker.md) 、[Docker从入门到上手干事](docs/tools/Docker从入门到实战.md)
+
+## Java 学习常见问题汇总
+
+1. [2021最新 Java 学习路线！凎！](https://www.zhihu.com/question/56110328/answer/869069586)
+2. [Java 培训四个月能学会吗？](docs/questions/java-training-4-month.md)
+3. [新手学习 Java，有哪些 Java 相关的博客，专栏，和技术学习网站推荐？](docs/questions/java-learning-website-blog.md)
+4. [Java 还是大数据，你需要了解这些东西！](docs/questions/java-big-data.md)
+
+---
