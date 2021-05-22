@@ -84,6 +84,7 @@ show processlist;
 show variables like 'max_connections';
 ```
 ![mysql默认的最大连接数](image/20201218154040173.png)
+
 **show参数说明**
 
 - 级别：默认为session级别，如果要设置为全局需要添加上global
