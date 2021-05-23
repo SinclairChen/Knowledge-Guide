@@ -103,9 +103,9 @@ redis> info replication
 slave宕机和恢复测试省略。
 
 **注意遇到了坑：**
-1、slave可以显示master信息，而master没有slave信息。
-2、master宕机后slave没有被提升为master。
+1. slave可以显示master信息，而master没有slave信息。
+2. master宕机后slave没有被提升为master。
 
 可能有几个主要原因：
-1、master信息配置不正确。
-2、还有需要配置auth-pass。
+1. master信息配置不正确。
+2. 还有需要配置auth-pass。
