@@ -102,7 +102,7 @@ redis> info replication
 
 slave宕机和恢复测试省略。
 
-注意这里有的同学遇到了坑，
+**注意遇到了坑：**
 1、slave可以显示master信息，而master没有slave信息。
 2、master宕机后slave没有被提升为master。
 
