@@ -13,6 +13,7 @@ IP地址	          节点角色&端口
 **防火墙记得关闭！！!**
 
 网络结构图：
+
 ![image.png](image/21fc6beb16e343e3bbe42eafc9651b03.png)
 
 在187和188的redis.conf配置中找到被注释的这一行
@@ -96,6 +97,7 @@ redis> info replication
 
 这个时候会有一个slave节点被Sentinel设置为master。
 再次启动master，它不一定会被选举为master。
+
 ![image.png](image/539390d8d28d40c6a70ab3e2b763cdb8.png)
 
 slave宕机和恢复测试省略。
