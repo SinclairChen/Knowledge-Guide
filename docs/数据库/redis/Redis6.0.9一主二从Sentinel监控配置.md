@@ -14,7 +14,7 @@ IP地址	          节点角色&端口
 
 网络结构图：
 
-![image.png](image/21fc6beb16e343e3bbe42eafc9651b03.png)
+![image-20210523110000315](image/image-20210523110000315.png)
 
 在187和188的redis.conf配置中找到被注释的这一行
 
