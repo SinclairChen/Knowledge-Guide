@@ -4,6 +4,7 @@
 ## 1、服务无法启动（5672端口未启动）
 
 RabbitMQ的服务是默认开机自启动的
+
 1）用不同方式启动RabbitMQ服务，命令行或者Windows本地服务管理
 比如windows：
 在cmd中进入sbin目录（不要用powershell）
@@ -54,6 +55,7 @@ netstat -an|findstr 15672
 ```
 
 1）RabbitMQ服务没有启动，5672端口没有启动，看上一步
+
 2）插件enable了吗？
 
 ```
@@ -70,15 +72,15 @@ netstat -an|findstr 15672
 
 ## 3、加入集群失败
 
-1）主节点是否启动成功，网络连接是否正常，ping hostname能不能ping通？
-2）25672端口，防火墙是否允许
-3）erlang.cookie是否一致
+1. 主节点是否启动成功，网络连接是否正常，ping hostname能不能ping通？
+2. 25672端口，防火墙是否允许
+3. erlang.cookie是否一致
 
 ## 4、添加用户失败
 
-## ![image.png](image/9ae9953e155b40e09521c16e425ca5f8.png)
+![image.png](image/9ae9953e155b40e09521c16e425ca5f8.png)
 
 根据提示，可能有几个原因：
-1）hostname配置有问题
-2）erlang.cookie有问题
-3）服务没启动成功
+1. hostname配置有问题
+2. erlang.cookie有问题
+3. 服务没启动成功
