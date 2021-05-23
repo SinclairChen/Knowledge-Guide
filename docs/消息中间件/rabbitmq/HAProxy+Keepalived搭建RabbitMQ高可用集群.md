@@ -6,10 +6,10 @@ RabbitMQ是当前最新版本3.8.9
 ## 机器规划
 
 准备三台虚拟机，可以用克隆功能。
-192.168.44.156 RabbitMQ内存节点 HAPRoxy Keepalived（master）
-192.168.44.157 RabbitMQ内存节点 HAPRoxy Keepalived（backup）
-192.168.44.158 RabbitMQ磁盘节点
-VIP 192.168.44.159
+- 192.168.44.156 RabbitMQ内存节点 HAPRoxy Keepalived（master）
+- 192.168.44.157 RabbitMQ内存节点 HAPRoxy Keepalived（backup）
+- 192.168.44.158 RabbitMQ磁盘节点
+- VIP 192.168.44.159
 
 ## 网络结构图
 
@@ -25,6 +25,7 @@ cd /usr/local/soft
 
 可以用XShell的批量操作功能，同时发送命令到所有窗口，同时安装三台。
 用户也要添加，管理插件也要启用。
+
 ![image.png](image/ae9c6c56e3a54b3ea4c22b85926991ad.png)
 
 ## 配置.erlang.cookie
@@ -94,6 +95,7 @@ cd /usr/local/soft/rabbitmq_server-3.8.9/sbin
 ```
 
 也可以在任何一台机器的管理界面查看：
+
 ![20201020_135912.png](image/33f293d3edf44126a725e0f4529a941b.png)
 
 设置镜像队列，在三台机器上执行：
@@ -195,12 +197,12 @@ service haproxy stop
 
 ### 浏览器访问：
 
-192.168.44.156:15670
-192.168.44.157:15670
+- 192.168.44.156:15670
+- 192.168.44.157:15670
 这两个都能正常访问RabbitMQ管理界面，用admin/admin登录
 
-192.168.44.156:9188/stats
-192.168.44.157:9188/stats
+- 192.168.44.156:9188/stats
+- 192.168.44.157:9188/stats
 这两个能正常访问HaProxy监控界面，用amdin/123456登录
 
 ![image.png](image/36b88e272b894a53b2f8e06d31de8e5c.png)
