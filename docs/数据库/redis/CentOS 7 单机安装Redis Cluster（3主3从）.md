@@ -244,9 +244,9 @@ Cluster Manager Commands:
 For check, fix, reshard, del-node, set-timeout you can specify the host and port of any working node in the cluster.
 ```
 
-附录：
+### 附录：
 
-### 集群命令
+**集群命令**
 
 cluster info ：打印集群的信息
 cluster nodes ：列出集群当前已知的所有节点（node），以及这些节点的相关信息。
@@ -255,7 +255,7 @@ cluster forget <node_id> ：从集群中移除 node_id 指定的节点(保证空
 cluster replicate <node_id> ：将当前节点设置为 node_id 指定的节点的从节点。
 cluster saveconfig ：将节点的配置文件保存到硬盘里面。
 
-### 槽slot命令
+**槽slot命令**
 
 cluster addslots [slot …] ：将一个或多个槽（slot）指派（assign）给当前节点。
 cluster delslots [slot …] ：移除一个或多个槽对当前节点的指派。
@@ -265,7 +265,7 @@ cluster setslot migrating <node_id> ：将本节点的槽 slot 迁移到 node_id
 cluster setslot importing <node_id> ：从 node_id 指定的节点中导入槽 slot 到本节点。
 cluster setslot stable ：取消对槽 slot 的导入（import）或者迁移（migrate）。
 
-### 键命令
+**键命令**
 
 cluster keyslot ：计算键 key 应该被放置在哪个槽上。
 cluster countkeysinslot ：返回槽 slot 目前包含的键值对数量。
