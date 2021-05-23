@@ -2,7 +2,7 @@
 
 首先，我们的问题是AQS中的tryAcquire方法为什么不定义成抽象方法，而是定义成一个实现的方法，但并没有真正实现。
 
-```
+```java
     protected boolean tryAcquire(int arg) {
         throw new UnsupportedOperationException();
     }
@@ -38,7 +38,7 @@
 
 于是找到CountDownLatch中锁的一个实现，发现果然能够证明我们的猜想。这个类中并没有实现tryAcquire。
 
-```
+```java
 private static final class Sync extends AbstractQueuedSynchronizer {
         private static final long serialVersionUID = 4982264981922014374L;
 
