@@ -71,7 +71,7 @@
 **安装与配置**
 
 1. **[CentOS7安装Redis 6.0.9 单实例](docs/数据库/redis/CentOS7安装Redis%206.0.9%20单实例.md)**
-2. **[阿里云CentOS7 Docker安装Redis](docs/数据库/redis/阿里云CentOS7 Docker安装Redis.md)**
+2. **[阿里云CentOS7 Docker安装Redis](./docs/数据库/redis/阿里云CentOS7 Docker安装Redis.md)**
 3. **[CentOS7 单机安装Redis Cluster (3主3从)](docs/数据库/redis/CentOS%207%20单机安装Redis%20Cluster（3主3从）.md)**
 4. **[Redis6.0.9一主二从Sentinel监控配置](docs/数据库/redis/Redis6.0.9一主二从Sentinel监控配置.md)**
 
@@ -80,8 +80,8 @@
 
 **安装与配置**
 
-1. **[CentOS7 yum方式安装MySQL 5.7](docs/数据库/mysql/CentOS7 yum方式安装MySQL 5.7.md)**
-2. **[阿里云CentOS 7 Docker安装MySQL 5.7](docs/数据库/mysql/阿里云CentOS 7 Docker安装MySQL 5.7.md)**
+1. **[CentOS7 yum方式安装MySQL 5.7](./docs/数据库/mysql/CentOS7 yum方式安装MySQL 5.7.md)**
+2. **[阿里云CentOS 7 Docker安装MySQL 5.7](./docs/数据库/mysql/阿里云CentOS 7 Docker安装MySQL 5.7.md)**
 3. **[MySQL主从复制配置](docs/数据库/mysql/MySQL主从复制配置.md)**
 
 
