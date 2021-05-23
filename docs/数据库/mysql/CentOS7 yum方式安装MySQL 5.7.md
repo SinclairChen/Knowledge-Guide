@@ -84,11 +84,15 @@ mysql> grant all privileges on *.* to 'root'@'%' identified by '123456';
 如果需要远程连接，注意开放3306端口或者关闭防火墙。
 
 MySQL默认的数据文件目录：
+
 show variables like ‘datadir’;
+
 /var/lib/mysql/
 
 MySQL默认错误日志文件：
+
 show variables like ‘log_error’;
+
 /var/log/mysqld.log
 
 ------

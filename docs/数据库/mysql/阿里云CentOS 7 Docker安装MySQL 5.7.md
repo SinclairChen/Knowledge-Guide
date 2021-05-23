@@ -89,9 +89,11 @@ grant all privileges on *.* to 'qingshan'@'localhost' with grant option;
 
 5、配置安全组规则允许外网访问
 我的资源，进入ECS实例
+
 ![20191124_223552.png](image/f04da2aa9d6d4a49867a2b7da7ccbeaa.png)
 
 从“管理”进入本实例安全组，配置规则
+
 ![20191124_223751.png](image/20b890d70a3546c58e45a97bf4645f1b.png)
 
 添加安全组规则
