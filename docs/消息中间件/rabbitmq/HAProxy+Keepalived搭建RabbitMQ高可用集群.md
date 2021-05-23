@@ -13,7 +13,7 @@
 
 ## 网络结构图
 
-![image.png](image/d1a22b141c9a4ff3b19b611864bf8550.png)
+![image-20210523121755193](image/image-20210523121755193.png)
 
 ## 安装Erlang和RabbitMQ
 
