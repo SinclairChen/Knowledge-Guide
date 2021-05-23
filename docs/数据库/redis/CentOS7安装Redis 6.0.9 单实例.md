@@ -1,6 +1,7 @@
 ## 1、下载redis
 
 下载地址在：redis.io 首页
+
 ![image.png](image/caa02b1da51e4277839e695aa6c39251.png)
 
 如果从官网下载慢，可以把链接贴到迅雷下载，再传到虚拟机：
