@@ -13,9 +13,10 @@ mkdir -p /usr/local/soft/redis/data/
 ```
 
 复制 `redis.conf` 文件到主机/usr/local/soft/redis/conf/目录下（这个配置文件可以在官网redis.io下载的压缩包中找到）。
-注意有两行配置要修改：
-daemonize yes 这一行必须注释，否则无法启动
-bind 127.0.0.1 改成 bind 0.0.0.0 ，否则只能在本机访问
+
+**注意有两行配置要修改：**
+1. daemonize yes 这一行必须注释，否则无法启动
+2. bind 127.0.0.1 改成 bind 0.0.0.0 ，否则只能在本机访问
 
 运行Redis服务端：
 
@@ -23,11 +24,12 @@ bind 127.0.0.1 改成 bind 0.0.0.0 ，否则只能在本机访问
 docker run -p 6379:6379 --name redis5 -v /usr/local/soft/redis/conf/redis.conf:/etc/redis/redis.conf -v /usr/local/soft/redis/data/:/data -d redis:latest redis-server /etc/redis/redis.conf --appendonly yes
 ```
 
-注意：
+**注意：**
 如果需要安装多个redis，可以修改映射的端口，如：
-6391:6379
-6392:6379
-6393:6379
+
+- 6391:6379
+- 6392:6379
+- 6393:6379
 
 外网环境记得在末尾加上以下参数，以免被攻击
 
