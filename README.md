@@ -33,10 +33,10 @@
 
 **知识点/面试题:**(必看:+1: )
 
-1. **[Java 基础知识](docs/java/basis/Java基础知识.md)**
-2. **[Java 基础知识疑难点/易错点](docs/java/basis/Java基础知识疑难点.md)**
 
 ### 并发
+
+- [AbstractQueuedSynchronizer中的tryAcquire为什么没有设置为抽象方法](docs/java/并发/AbstractQueuedSynchronizer中的tryAcquire为什么没有设置为抽象方法.md)
 
 
 ### 框架
@@ -68,8 +68,24 @@
 
 ### Redis
 
+**安装与配置**
+
+1. **[CentOS7安装Redis 6.0.9 单实例](docs/数据库/redis/CentOS7安装Redis%206.0.9%20单实例.md)**
+2. **[阿里云CentOS7 Docker安装Redis](docs/数据库/redis/阿里云CentOS7 Docker安装Redis.md)**
+3. **[CentOS7 单机安装Redis Cluster (3主3从)](docs/数据库/redis/CentOS%207%20单机安装Redis%20Cluster（3主3从）.md)**
+4. **[Redis6.0.9一主二从Sentinel监控配置](docs/数据库/redis/Redis6.0.9一主二从Sentinel监控配置.md)**
+
 
 ### MySQL
+
+**安装与配置**
+
+1. **[CentOS7 yum方式安装MySQL 5.7](docs/数据库/mysql/CentOS7 yum方式安装MySQL 5.7.md)**
+2. **[阿里云CentOS 7 Docker安装MySQL 5.7](docs/数据库/mysql/阿里云CentOS 7 Docker安装MySQL 5.7.md)**
+3. **[MySQL主从复制配置](docs/数据库/mysql/MySQL主从复制配置.md)**
+
+
+**原理**
 
 1. **[一条查询语句在MySQL中到底是如何执行的？](docs/数据库/mysql/一条查询语句在MySQL中到底是如何执行的？.md)**
 2. **[一条更新语句在MySQL是如何执行的？](docs/数据库/mysql/一条更新语句在MySQL是如何执行的？.md)**
@@ -85,6 +101,12 @@
 
 ### RabbitMQ
 
+**安装与配置**
+
+1. **[CentOS7安装RabbitMQ单机版(3.8.4)](docs/消息中间件/rabbitmq/CentOS7安装RabbitMQ单机版(3.8.4).md)**
+2. **[Docker安装RabbitMQ集群.md](docs/消息中间件/rabbitmq/Docker安装RabbitMQ集群.md)**
+3. **[HAProxy+Keepalived搭建RabbitMQ高可用集群](docs/消息中间件/rabbitmq/HAProxy+Keepalived搭建RabbitMQ高可用集群.md)**
+4. **[RabbitMQ安装问题汇总](docs/消息中间件/rabbitmq/RabbitMQ安装问题汇总.md)**
 
 ### RocketMQ
 
@@ -101,6 +123,11 @@
 
 ### zookeeper
 
+**安装与配置**
+
+1. **[CentOS7安装Zookeeper](docs/分布式/zookeeper/CentOS7安装Zookeeper.md)**
+2. **[zookeeper 集群搭建](docs/分布式/zookeeper/zookeeper%20集群搭建.md)**
+
 
 ### dubbo
 
@@ -109,6 +136,12 @@
 
 
 ### Nginx
+
+
+**安装与配置**
+
+1. **[CentOS7源码方式安装nginx-1.18.0](docs/服务器/nginx/CentOS7源码方式安装nginx-1.18.0.md)**
+2. **[Nginx 1.18.0 安装第三方负载均衡模块 fair](docs/服务器/nginx/Nginx%201.18.0%20安装第三方负载均衡模块%20fair.md)**
 
 
 ### Tomcat
@@ -122,6 +155,10 @@
 
 #### Linux
 
+**安装与配置**
+
+1. **[VMware+Centos7 静态IP设置方法.md](docs/计算机基础/操作系统/linux/VMware+Centos7%20静态IP设置方法.md)**
+
 
 ### 数据结构与算法
 
@@ -130,6 +167,10 @@
 
 
 ## 工具
+
+### maven
+
+1. **[解决maven依赖变红，jar包无法下载Could not transfer artifact](docs/工具/maven/解决maven依赖变红，jar包无法下载Could%20not%20transfer%20artifact.md)**
 
 
 ## 云原生
