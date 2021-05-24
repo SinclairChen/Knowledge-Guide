@@ -87,7 +87,7 @@
 **原理**
 
 1. **[redis过期与淘汰策略](docs/数据库/redis/redis过期与淘汰策略.md)**
-
+2. **[redis持久化机制RDB和AOF](docs/数据库/redis/redis持久化机制RDB和AOF.md)**
 
 ### MySQL
 
