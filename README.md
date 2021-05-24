@@ -80,6 +80,13 @@
 3. **[CentOS7 单机安装Redis Cluster (3主3从)](docs/数据库/redis/CentOS%207%20单机安装Redis%20Cluster（3主3从）.md)**
 4. **[Redis6.0.9一主二从Sentinel监控配置](docs/数据库/redis/Redis6.0.9一主二从Sentinel监控配置.md)**
 
+**数据类型**
+
+**[string](docs/数据库/redis/String字符串.md)**
+
+**原理**
+
+
 
 ### MySQL
 
