@@ -86,6 +86,7 @@
 
 **原理**
 
+1. **[redis过期与淘汰策略](docs/数据库/redis/redis过期与淘汰策略.md)**
 
 
 ### MySQL
