@@ -91,6 +91,7 @@
 5. **[如何在Redis使用Lua脚本](docs/数据库/redis/如何在Redis使用Lua脚本.md)**
 6. **[redis的主从复制与sentinel](docs/数据库/redis/redis的主从复制与sentinel.md)**
 7. **[redis cluster](docs/数据库/redis/redis%20cluster.md)**
+8. **[缓存一致性问题](docs/数据库/redis/缓存一致性问题.md)**
 
 ### MySQL
 
