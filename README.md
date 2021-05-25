@@ -91,6 +91,7 @@
 3. **[redis为什么这么快？](docs/数据库/redis/redis为什么这么快？.md)**
 4. **[redis的事务](docs/数据库/redis/redis的事务.md)**
 5. **[如何在Redis使用Lua脚本](docs/数据库/redis/如何在Redis使用Lua脚本.md)**
+6. **[redis的主从复制与sentinel](docs/数据库/redis/redis的主从复制与sentinel.md)**
 
 ### MySQL
 
