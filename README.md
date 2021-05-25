@@ -73,7 +73,7 @@
 
 ### Redis
 
-**安装与配置**
+**安装、配置与使用**
 
 1. **[CentOS7安装Redis 6.0.9 单实例](docs/数据库/redis/CentOS7安装Redis%206.0.9%20单实例.md)**
 2. **[阿里云CentOS7 Docker安装Redis](docs/数据库/redis/阿里云CentOS7%20Docker安装Redis.md)**
@@ -96,7 +96,7 @@
 
 ### MySQL
 
-**安装与配置**
+**安装、配置与使用**
 
 1. **[CentOS7 yum方式安装MySQL 5.7](docs/数据库/mysql/CentOS7%20yum方式安装MySQL%205.7.md)**
 2. **[阿里云CentOS 7 Docker安装MySQL 5.7](docs/数据库/mysql/阿里云CentOS%207%20Docker安装MySQL%205.7.md)**
@@ -119,7 +119,7 @@
 
 ### RabbitMQ
 
-**安装与配置**
+**安装、配置与使用**
 
 1. **[CentOS7安装RabbitMQ单机版(3.8.4)](docs/消息中间件/rabbitmq/CentOS7安装RabbitMQ单机版(3.8.4).md)**
 2. **[Docker安装RabbitMQ集群.md](docs/消息中间件/rabbitmq/Docker安装RabbitMQ集群.md)**
@@ -141,7 +141,7 @@
 
 ### zookeeper
 
-**安装与配置**
+**安装、配置与使用**
 
 1. **[CentOS7安装Zookeeper](docs/分布式/zookeeper/CentOS7安装Zookeeper.md)**
 2. **[zookeeper 集群搭建](docs/分布式/zookeeper/zookeeper%20集群搭建.md)**
@@ -156,7 +156,7 @@
 ### Nginx
 
 
-**安装与配置**
+**安装、配置与使用**
 
 1. **[CentOS7源码方式安装nginx-1.18.0](docs/服务器/nginx/CentOS7源码方式安装nginx-1.18.0.md)**
 2. **[Nginx 1.18.0 安装第三方负载均衡模块 fair](docs/服务器/nginx/Nginx%201.18.0%20安装第三方负载均衡模块%20fair.md)**
@@ -173,7 +173,7 @@
 
 #### Linux
 
-**安装与配置**
+**安装、配置与使用**
 
 1. **[VMware+Centos7 静态IP设置方法.md](docs/计算机基础/操作系统/linux/VMware+Centos7%20静态IP设置方法.md)**
 

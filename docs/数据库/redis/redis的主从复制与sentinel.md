@@ -156,7 +156,33 @@ sentinel down-after-milliseconds <master-name> <milliseconds>
 
 
 
-### 2.4 Sentinel连接使用
+### 2.4 Sentinel的不足
+
+1、 主从切换的过程中会丢失数据
+
+
+
+![image-20210525160858889](image/image-20210525160858889.png)
+
+
+
+2、没有解决水平扩容的问题
+
+
+
+![image-20210525160942382](image/image-20210525160942382.png)
+
+
+
+3、集群如果发生脑裂，导致数据丢失的问题
+
+
+
+![image-20210525161105820](image/image-20210525161105820.png)
+
+
+
+### 2.5 Sentinel连接使用
 
 ​	1、 Jedis连接Sentinel
 
@@ -187,27 +213,97 @@ spring.redis.sentinel.nodes=192.168.8.203:26379,192.168.8.204:26379,192.168.8.20
 
 
 
-### 2.4 Sentinel的不足
+### 2.6 Sentinel获取连接原理
 
-1、 主从切换的过程中会丢失数据
-
-
-
-![image-20210525160858889](image/image-20210525160858889.png)
+Jedis连接Sentinel的时候，我们配置的是全部哨兵的地址。Sentinel是如何返回可用master地址的呢？
 
 
 
-2、没有解决水平扩容的问题
+构造方法：
+
+```java
+pool = new JedisSentinelPool(masterName, sentinels);
+```
 
 
 
-![image-20210525160942382](image/image-20210525160942382.png)
+调用了：
+
+```java
+HostAndPort master = initSentinels(sentinels, masterName);
+```
 
 
 
-3、集群如果发生脑裂，导致数据丢失的问题
+initSentinels源码：
 
+```java
+private HostAndPort initSentinels(Set<String> sentinels, final String masterName) {
+	HostAndPort master = null; 
+    boolean sentinelAvailable = false;
 
+    log.info("Trying to find master  from available Sentinels..."); 
+    // 有多个 sentinels,遍历这些个 sentinels
+	for (String sentinel : sentinels) {
+		// host:port 表示的 sentinel 地址转化为一个 HostAndPort  对象。
+        final HostAndPort hap = HostAndPort.parseString(sentinel);
+		
+        log.fine("Connecting to Sentinel " + hap);
+        
+        Jedis jedis = null;
+		try {
+			//连接到 sentinel
+			jedis = new Jedis(hap.getHost(), hap.getPort());
+			// 根据 masterName 得到 master 的地址，返回一个 list，host= list[0], port =// list[1]
+            List<String> masterAddr = jedis.sentinelGetMasterAddrByName(masterName);
+			
+            // connected to sentinel... 
+            sentinelAvailable = true;
+            
+			if (masterAddr == null || masterAddr.size() != 2) {
+				log.warning("Can not get master addr, master name: " + masterName + ". Sentinel: " +  hap + ".");
+				continue;
+            }
+			//   如果在任何一个 sentinel 中找到了 master，不再遍历 
+            sentinels master = toHostAndPort(masterAddr);
+			log.fine("Found Redis master at " +  master);
+            break;
+		} catch (JedisException e) {
+			// resolves #1036, it should handle JedisException there's  another chance 
+            // of raising JedisDataException
+			log.warning("Cannot get master address from sentinel running @ " + hap + ". Reason: " + e + ". Trying next one.");
+		} finally {
+			if (jedis !=  null) { 
+                jedis.close();
+			} 
+        }
+	}
+    
+    //到这里，如果 master为 null，则说明有两种情况，一种是所有的 sentinels 节点都 down 掉了，一种是 master 节点没有被存活的 sentinels 监控到
+	if (master  == null) { 
+        if (sentinelAvailable) {
+			// can connect to sentinel, but master  name  seems  to not 
+            // monitored
+			throw new JedisException("Can connect to sentinel, but " + masterName + " seems  to be not monitored...");
+		} else {
+			throw new JedisConnectionException("All sentinels down, cannot determine where is " + masterName + " master  is running...");
+		}
+    }
+    
+	// 如果走到这里，说明找到了 master  的地址
+	log.info("Redis master running at " +  master + ", starting Sentinel listeners...");
 
-![image-20210525161105820](image/image-20210525161105820.png)
+    // 启动对每个 sentinels 的监听为每个 sentinel 都启动了一个监听者 MasterListener。MasterListener 本身是一个线 程，它会去订阅 sentinel 上关于 master 节点地址改变的消息。
+	for (String sentinel : sentinels) {
+		final HostAndPort hap = HostAndPort.parseString(sentinel);
+		MasterListener masterListener = new MasterListener(masterName, hap.getHost(), hap.getPort());
+        
+        // whether MasterListener threads are  alive  or not, process can be  stopped
+		masterListener.setDaemon(true);
+		masterListeners.add(masterListener);
+		masterListener.start();
+    }
+	return master; 
+}
+```
 
