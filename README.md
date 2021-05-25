@@ -92,6 +92,7 @@
 4. **[redis的事务](docs/数据库/redis/redis的事务.md)**
 5. **[如何在Redis使用Lua脚本](docs/数据库/redis/如何在Redis使用Lua脚本.md)**
 6. **[redis的主从复制与sentinel](docs/数据库/redis/redis的主从复制与sentinel.md)**
+7. **[redis cluster](docs/数据库/redis/redis cluster.md)**
 
 ### MySQL
 
