@@ -107,8 +107,8 @@ show slave status\G;
 IO线程和SQL线程都是成功运行的：
 
 ```
-             Slave_IO_Running: Yes
-            Slave_SQL_Running: Yes
+Slave_IO_Running: Yes
+Slave_SQL_Running: Yes
 ```
 
 现在可以在master节点上面做任意对于库表的修改操作，slave会自动同步。
@@ -128,4 +128,5 @@ show slave status\G
 2、配置文件 _ 写成了 -
 3、用来测试同步的表名用了关键字
 
-其实这些都是小问题，也只能通过看日志、细心检查解决
+
+
