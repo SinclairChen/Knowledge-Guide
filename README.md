@@ -89,6 +89,7 @@
 1. **[redis过期与淘汰策略](docs/数据库/redis/redis过期与淘汰策略.md)**
 2. **[redis持久化机制RDB和AOF](docs/数据库/redis/redis持久化机制RDB和AOF.md)**
 3. **[redis为什么这么快？](docs/数据库/redis/redis为什么这么快？.md)**
+3. **[redis的事务](docs/数据库/redis/redis的事务.md)**
 
 ### MySQL
 
