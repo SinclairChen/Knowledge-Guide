@@ -58,7 +58,7 @@
 1. **[类的加载](docs/java/jvm/类的加载.md)**
 2. **[运行时数据区](docs/java/jvm/运行时数据区.md)**
 3. **[JVM内存模型](docs/java/jvm/jvm内存模型.md)**
-4. **[垃圾回收](docs/java/jvm/)**
+4. **[垃圾回收](docs/java/jvm/垃圾回收.md)**
 5. **[jvm调优——常用参数篇](docs/java/jvm/)**
 6. **[jvm调优——常用命令篇](docs/java/jvm/)**
 7. **[jvm调优——常用工具篇](docs/java/jvm/)**
