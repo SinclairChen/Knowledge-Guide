@@ -62,7 +62,7 @@
 5. **[jvm调优——常用参数篇](docs/java/jvm/jvm调优-常用参数篇.md)**
 6. **[jvm调优——常用命令篇](docs/java/jvm/jvm调优-常用命令篇.md)**
 7. **[jvm调优——常用工具篇](docs/java/jvm/jvm调优-常用工具篇.md)**
-8. **[GC调优分析](docs/java/jvm/)**
+8. **[GC调优分析](docs/java/jvm/GC调优分析.md)**
 
 ## Golang
 
