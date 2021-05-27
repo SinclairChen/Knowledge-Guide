@@ -83,7 +83,8 @@
 # (globals, registers, thread stacks and VM data structures).
 [Ext Root Scanning (ms): Min: 0.2, Avg: 0.4, Max: 0.7, Diff: 0.5, Sum: 1.7]
 
-# Update RS gives us the time each thread spent in updating the Remembered Sets. [Update RS (ms): Min: 0.0, Avg: 0.0, Max: 0.0, Diff: 0.0, Sum: 0.0]
+# Update RS gives us the time each thread spent in updating the Remembered Sets.
+[Update RS (ms): Min: 0.0, Avg: 0.0, Max: 0.0, Diff: 0.0, Sum: 0.0]
 
 ...
 ```
@@ -240,31 +241,32 @@ Throughput       Min Pause       Max Pause     Avg Pause       GC cou
 
 1、发现问题：
 
-1. GC频繁
-2. 死锁
-3. OOM
-4. 线程池不够用
-5. CPU负载过高
+> 1. GC频繁
+> 2. 死锁
+> 3. OOM
+> 4. 线程池不够用
+> 5. CPU负载过高
 
 
 
 2、排查问题
 
-	1. 打印GC日志，通过日志工具，查看Minor/Major GC
- 	2. 使用jstack查看线程堆栈信息
- 	3. dump堆文件，使用MAT或者其他工具分析
- 	4. 合理使用jdk自带的jconsole、jvisualve，阿里的Arthas等实时查看JVM的状态
- 	5. 灵活应用jps，jinfo，jstat，jmap等常用命令
+> 1. 打印GC日志，通过日志工具，查看Minor/Major GC
+> 2. 使用jstack查看线程堆栈信息
+> 3. dump堆文件，使用MAT或者其他工具分析
+> 4. 合理使用jdk自带的jconsole、jvisualve，阿里的Arthas等实时查看JVM的状态
+> 5. 灵活应用jps，jinfo，jstat，jmap等常用命令
 
 
 
 3、提出解决方案
 
-1. 适当增加堆内存大小
-2. 选择合适的垃圾收集器
-3. 使用zk、redis实现分布式锁
-4. 设置本地，nginx等缓存减少对后端服务器的访问
-5. 后端代码优化即使释放资源
-6. 合理设置线程池中的参数
-7. 集群不是从而减少单节点的压力
-8. 利用一些消息中间件，实现异步消息
+> 1. 适当增加堆内存大小
+> 2. 选择合适的垃圾收集器
+> 3. 使用zk、redis实现分布式锁
+> 4. 设置本地，nginx等缓存减少对后端服务器的访问
+> 5. 后端代码优化即使释放资源
+> 6. 合理设置线程池中的参数
+> 7. 集群不是从而减少单节点的压力
+> 8. 利用一些消息中间件，实现异步消息
+
