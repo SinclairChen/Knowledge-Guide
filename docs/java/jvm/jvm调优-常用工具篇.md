@@ -202,13 +202,3 @@ Retained heap：是shallow heap的总和
 
 
 
-## 5. GC日志分析工具
-
-1、gceasy：[官网](https://gceasy.io/)
-
-![image-20210527145717832](image/image-20210527145717832.png)
-
-
-
-2、GCViewer
-
