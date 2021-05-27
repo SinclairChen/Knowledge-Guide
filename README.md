@@ -128,6 +128,8 @@
 
 ### RabbitMQ
 
+- **[认识RabbitMQ](docs/消息中间件/rabbitmq/认识RabbitMQ.md)**
+
 **安装、配置与使用**
 
 1. **[CentOS7安装RabbitMQ单机版(3.8.4)](docs/消息中间件/rabbitmq/CentOS7安装RabbitMQ单机版(3.8.4).md)**
