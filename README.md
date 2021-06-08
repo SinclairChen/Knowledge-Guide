@@ -130,12 +130,16 @@
 
 - **[认识RabbitMQ](docs/消息中间件/rabbitmq/认识RabbitMQ.md)**
 
-**安装、配置与使用**
+**安装**
 
 1. **[CentOS7安装RabbitMQ单机版(3.8.4)](docs/消息中间件/rabbitmq/CentOS7安装RabbitMQ单机版(3.8.4).md)**
 2. **[Docker安装RabbitMQ集群.md](docs/消息中间件/rabbitmq/Docker安装RabbitMQ集群.md)**
 3. **[HAProxy+Keepalived搭建RabbitMQ高可用集群](docs/消息中间件/rabbitmq/HAProxy+Keepalived搭建RabbitMQ高可用集群.md)**
 4. **[RabbitMQ安装问题汇总](docs/消息中间件/rabbitmq/RabbitMQ安装问题汇总.md)**
+
+**使用&配置**
+
+1. **[rabbitmq的使用](docs/消息中间件/rabbitmq/rabbitmq的使用.md)**
 
 ### RocketMQ
 
