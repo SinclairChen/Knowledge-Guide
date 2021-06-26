@@ -56,7 +56,7 @@ docker run -d \
  -p 5673:5672 \
  -p 15673:15672 \
  -e RABBITMQ_NODENAME=rabbitmq1 \
- -e RABBITMQ_ERLANG_COOKIE='GUPAOEDUFORBETTERYOU' \
+ -e RABBITMQ_ERLANG_COOKIE='RabbitMQDockerCluster' \
  -h rabbitmq1 \
  --net=rabbitmqnet \
  rabbitmq:management
@@ -65,7 +65,7 @@ docker run -d \
  -p 5674:5672 \
  -p 15674:15672 \
  -e RABBITMQ_NODENAME=rabbitmq1 \
- -e RABBITMQ_ERLANG_COOKIE='GUPAOEDUFORBETTERYOU' \
+ -e RABBITMQ_ERLANG_COOKIE='RabbitMQDockerCluster' \
  -h rabbitmq2 \
  --net=rabbitmqnet \
  rabbitmq:management
@@ -74,7 +74,7 @@ docker run -d \
  -p 5675:5672 \
  -p 15675:15672 \
  -e RABBITMQ_NODENAME=rabbitmq1 \
- -e RABBITMQ_ERLANG_COOKIE='GUPAOEDUFORBETTERYOU' \
+ -e RABBITMQ_ERLANG_COOKIE='RabbitMQDockerCluster' \
  -h rabbitmq3 \
  --net=rabbitmqnet \
  rabbitmq:management
