@@ -8,12 +8,16 @@
 
 CentOS是RedHat的分支，所以rpm和yum都可以使用。
 
+
+
 ## 版本关系
 
 在RabbitMQ中需要注意两点：
 1、RabbitMQ依赖于Erlang，需要先安装Erlang
 2、Erlang和RabbitMQ版本有对应关系
 http://www.rabbitmq.com/which-erlang.html
+
+
 
 ## 安装Erlang 21.3
 
@@ -48,6 +52,8 @@ make && make install
 yum install -y socat
 ```
 
+
+
 ## 配置Erlang环境变量
 
 ```
@@ -66,11 +72,15 @@ export PATH=$PATH:/usr/local/erlang/bin
 source /etc/profile
 ```
 
+
+
 ## 验证Erlang是否安装成功
 
 输入`erl`，会出现版本信息，即安装成功
 
 ![20200620_213420.png](image/ab43600edd9f413fb11dc08701e5cfd1.png)
+
+
 
 ## 安装RabbitMQ 3.8.4
 
@@ -81,6 +91,8 @@ wget https://dl.bintray.com/rabbitmq/all/rabbitmq-server/3.8.4/rabbitmq-server-g
 xz -d rabbitmq-server-generic-unix-3.8.4.tar.xz
 tar -xvf rabbitmq-server-generic-unix-3.8.4.tar 
 ```
+
+
 
 ## 配置RabbitMQ环境变量
 
@@ -101,6 +113,8 @@ export PATH=$PATH:/usr/local/rabbitmq_server-3.8.4/sbin
 ```
 source /etc/profile
 ```
+
+
 
 ## 启动RabbitMQ
 
@@ -133,6 +147,8 @@ kill -9 进程号
 看到兔子头像就启动成功了
 ![20200620_214501.png](image/719459358013491a81e2080835453add.png)
 
+
+
 ## 添加其他用户
 
 因为guest用户只能在本机访问，添加一个admin用户，密码也是admin
@@ -142,6 +158,8 @@ kill -9 进程号
 ./rabbitmqctl set_user_tags admin administrator
 ./rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"
 ```
+
+
 
 ## 启用管理插件
 
@@ -153,3 +171,20 @@ kill -9 进程号
 http://虚拟机IP:15672
 
 ![20200620_214826.png](image/12c90cc8bbbd4db4ab61cf0a3984134c.png)
+
+
+
+## RabbitMQ基本配置
+
+RabbitMQ有一套默认的配置，能够满足日常开发需求，如果需要修改，需要自己创建一个配置文件
+
+```
+touch /etc/rabbitmq/rabbitmq.conf
+```
+
+
+
+[配置文件示例：](https://github.com/rabbitmq/rabbitmq-server/blob/master/deps/rabbit/docs/rabbitmq.conf.example)
+
+[配置文件说明：](https://www.rabbitmq.com/configure.html#config-items)
+
