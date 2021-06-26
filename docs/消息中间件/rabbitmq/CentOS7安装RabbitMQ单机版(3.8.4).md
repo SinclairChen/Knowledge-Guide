@@ -151,13 +151,64 @@ kill -9 进程号
 
 ## 添加其他用户
 
-因为guest用户只能在本机访问，添加一个admin用户，密码也是admin
+因为`guest`用户只能在本机访问，添加一个`admin`用户，密码也是`admin`
 
 ```
 ./rabbitmqctl add_user admin admin
 ./rabbitmqctl set_user_tags admin administrator
 ./rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"
 ```
+
+
+
+## RabbitMQ中的角色
+
+### no
+
+不能访问management plugin
+
+
+
+### management
+
+用户可以通过AMQP做任何事，同时还可以：
+
+1. 列出自己可以通过AMQP登入virtual hosts
+2. 查看自己的virtual hosts中的queues， exchanges和bindings
+3. 查看和关闭自己的channels和connections
+4. 查看有关自己的virtual hosts的“全局”的统计信息，包含其他用户在这些virtual hosts中的活动
+
+
+
+### policymaker
+
+management可以做的任何事外，还可以：
+
+- 查看、创建和删除自己的virtual hosts所属的policies和parameters
+
+
+
+### monitoring
+
+management可以做的任何事外，还可以：
+
+1. 列出所有virtual hosts，包括他们不能登录的virtual hosts
+2. 查看其他用户的connnections 和 channels
+3. 查看节点级别的数据，如：clustering和memroy使用情况
+4. 查看真正的关于所有virtual hosts的全局的统计信息
+
+
+
+### administrator
+
+policymaker和monitoring可以做的任何事外，还可以：
+
+1. 创建和删除virtual hosts
+2. 查看、创建和删除users
+3. 查看创建和删除permisssions
+4. 关闭其他用户的connections
+
+
 
 
 
