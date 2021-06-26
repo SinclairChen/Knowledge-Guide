@@ -405,15 +405,19 @@ x-delayed-message 是插件提供的类型，并不是 rabbitmq 本身的。
 
 [官方文档：内存警报](https://www.rabbitmq.com/memory.html)
 
-RabbitMQ在启动的时候会检测机器的物理内存数值。当RabbitMQ占用内存超过内存阈值0.4，也就是说占用内存超过40%时，会主动抛出一个内存警告并阻塞所有连接（Connections）。
+RabbitMQ在启动的时候会检测机器的物理内存数值。当RabbitMQ占用内存超过内存阈值0.4，也就是说占用内存超过40%时，会主动抛出一个内存警告并阻塞所有连接（Connections）。来保证服务避免崩溃，客户端与服务端的心跳检测也会失效。
 
 
 
 1、可以通过rabbitmq.config文件来调整这个内存的阈值。
 
 ```
-[{rabbit, [{vm_memory_high_watermark, 0.4}]}]
+vm_memory_high_watermark.relative=0.4
+# vm_memory_high_watermark.absolute=1G
 ```
+
+- relative：相对值，建议取值在0.4~0.66之间，不建议超过0.7
+- absolute：单位为KB、MB、GB
 
 
 
@@ -423,17 +427,64 @@ RabbitMQ在启动的时候会检测机器的物理内存数值。当RabbitMQ占�
 rabbitmqctl set_vm_memory_high_watermark 0.3
 ```
 
+通过这个命令修改的阈值，在Broker重启后失效。
 
 
-#### 3.4.2 磁盘控制
+
+#### 3.4.2 内存换页
+
+在某个Broker节点触及内存并阻塞生产者之前，它会尝试将队列中的消息换页到磁盘以释放内存空间。持久化和非持久化的消息都会存储到磁盘中，其中持久化的消息本身就在磁盘中有一份副本，这里会将持久化的消息从内存中清除掉。
+
+
+
+默认情况，在内存到达内存阈值的50%时会进行换页动作。也就是，在默认的内存阈值0.4的情况下，但该内存超过0.4*0.5=0.2时进行换页动作。
+
+
+
+可以通过在配置文件中配置：
+
+```
+vm_memory_high_watermark.relative=0.4
+vm_memory_high_watermark_paging_ratio=0.75
+```
+
+> 以上配置将会在RabbitMQ内存使用率达到30%时进行换页动作，并在40%时阻塞生产者。
+>
+> 当vm_memory_high_watermark_paging_ratio的值大于1时，禁用此功能
+
+
+
+#### 3.4.3 磁盘控制
 
 [官方文档：可用磁盘空间警报](https://www.rabbitmq.com/disk-alarms.html)
 
-另一种方式就是通过磁盘来控制消息的发布。当可用磁盘空间空间低于50M（默认大小）时，触发流控。
+另一种方式就是通过磁盘来控制消息的发布。当可用磁盘空间空间低于50M（默认大小）时，触发流控。阻塞消费者，这样可以避免因非持久化的消息持续换页而耗尽磁盘空间导致服务崩溃。
 
 
 
-设置：例如设置为磁盘的30%或者2GB
+默认磁盘阈值为50mb：表示当磁盘空间低于50MB时会阻塞生产者并停止内存中消息的换页动作。
+
+这个阈值的设置可以减小，但是不能完全消除因磁盘耗尽而导致服务崩溃的可能性。比如在两次磁盘空间检测期间，磁盘空间从大于50MB减少到0MB
+
+
+
+一般建议将磁盘阈值设置为与操作系统内存一样的大小。
+
+
+
+通过命令临时调整：
+
+```
+rabbitmqctl set_disk_free_limit <disk_limit>
+rabbitmqctl set_disk_free_limit mem_relative <fraction>
+```
+
+- disk_limit：固定大小，单位为KB、MB、GB
+- fraction：相对比值，建议取值为1.0~2.0之间
+
+
+
+配置文件设置：例如设置为磁盘的30%或者2GB
 
 ```
 disk_free_limit.relative = 3.0
