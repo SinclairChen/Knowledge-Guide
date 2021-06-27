@@ -324,8 +324,6 @@ public Binding bindingDead(@Qualifier("deatLetterQueue") Queue queue, @Qualifier
 
 
 
-
-
 ### 3.3 延迟队列
 
 在实际业务中，有一些需要演示发送消息的场景，如未付款15分钟后关闭。
@@ -380,7 +378,51 @@ x-delayed-message 是插件提供的类型，并不是 rabbitmq 本身的。
 
 
 
-### 3.4 服务端限流
+### 3.4 持久化
+
+RabbitMQ的持久化分为交换机持久化、队列持久化和消息持久化
+
+- 定义持久化交换机，通过第三个参数`durable`开启/关闭
+
+  ```java
+  channel.exchangeDeclare(exchangeName, exchangeType, durable);
+  ```
+
+
+
+-  定义持久化队列，通过第二个参数`durable`开启/关闭
+
+  ```java
+  channel.queueDeclare(queue, durable, exclusive, autoDelete, arguments);
+  ```
+
+
+
+- 发送持久化消息，需要在消息属性中设置`deliveryMode=2`，这个属性在`BasicProperties`中，通过`basicPublish`方法的`props`参数传入
+
+  ```java
+  channel.basicPublish(exchange, routingKey, props, body);
+  ```
+
+  `BasicProperties`对象可以从RabbitMQ内置的`MessageProperties`类中获取
+
+  ```JAVA
+  MessageProperties.PERSISTENT_TEXT_PLAIN
+  ```
+
+  如果还需要设置其他属性，可以通过AMQP.BasicProperties.Builder去构建一个BasicProperties对象
+
+  ```java
+  new AMQP.BasicProperties.Buidler()
+  		.deliveryMode(2)
+  		.build();
+  ```
+
+  
+
+
+
+### 3.5 服务端限流
 
 [官方文档：流控](https://www.rabbitmq.com/flow-control.html)
 
@@ -401,7 +443,7 @@ x-delayed-message 是插件提供的类型，并不是 rabbitmq 本身的。
 
 
 
-#### 3.4.1 内存控制
+#### 3.5.1 内存控制
 
 [官方文档：内存警报](https://www.rabbitmq.com/memory.html)
 
@@ -431,7 +473,7 @@ rabbitmqctl set_vm_memory_high_watermark 0.3
 
 
 
-#### 3.4.2 内存换页
+#### 3.5.2 内存换页
 
 在某个Broker节点触及内存并阻塞生产者之前，它会尝试将队列中的消息换页到磁盘以释放内存空间。持久化和非持久化的消息都会存储到磁盘中，其中持久化的消息本身就在磁盘中有一份副本，这里会将持久化的消息从内存中清除掉。
 
@@ -454,7 +496,7 @@ vm_memory_high_watermark_paging_ratio=0.75
 
 
 
-#### 3.4.3 磁盘控制
+#### 3.5.3 磁盘控制
 
 [官方文档：可用磁盘空间警报](https://www.rabbitmq.com/disk-alarms.html)
 
@@ -493,7 +535,7 @@ disk_free_limit.absolute = 2GB
 
 
 
-### 3.5 消费端限流
+### 3.6 消费端限流
 
 [官方文档](https://www.rabbitmq.com/consumer-prefetch.html)
 
