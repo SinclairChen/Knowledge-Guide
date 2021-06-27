@@ -88,6 +88,8 @@ rabbitmqctl stop_app
 rabbitmqctl reset
 rabbitmqctl join_cluster --ram rabbitmq1@rabbitmq1
 rabbitmqctl start_app
+
+
 docker exec -it rabbitmq3 /bin/bash
 rabbitmqctl stop_app
 rabbitmqctl reset
@@ -100,3 +102,4 @@ http://192.168.8.146:15673/
 guest/guest登录
 
 ![20190824_113102.png](image/6778a3805bff4b46a47bdf415a773b3e.png)
+
