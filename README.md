@@ -111,7 +111,8 @@
 
 **使用&配置**
 
-1. **[rabbitmq的使用](docs/消息中间件/rabbitmq/rabbitmq的使用.md)**
+1. **[Rabbitmq的使用](docs/消息中间件/rabbitmq/rabbitmq的使用.md)**
+2. **[RabbitMQ可靠性消息投递](docs/消息中间件/rabbitmq/RabbitMQ可靠性消息投递.md)**
 
 ### RocketMQ
 
