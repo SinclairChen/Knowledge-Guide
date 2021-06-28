@@ -9,6 +9,7 @@
 ### 并发
 
 1. **[多线程的基本原理](docs/java/并发/多线程的基本原理.md)**
+2. **[原子性问题、synchronized及CAS](docs/java/并发/原子性问题、synchronized及CAS.md)**
 
 
 ### 其他
