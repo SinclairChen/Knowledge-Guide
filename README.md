@@ -11,7 +11,7 @@
 1. **[多线程的基本原理](docs/java/并发/多线程的基本原理.md)**
 2. **[原子性问题、synchronized及CAS](docs/java/并发/原子性问题、synchronized及CAS.md)**
 3. **[可见性、原子性问题](docs/java/并发/可见性、原子性问题.md)**
-4. **[JMM与happens-before原则](docs/java/JMM与happens-before原则.md)**
+4. **[JMM与happens-before原则](docs/java/并发/JMM与hapens-before原则.md)**
 
 **其他**
 
