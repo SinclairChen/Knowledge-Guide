@@ -42,8 +42,6 @@ public class IncrDemo implements Runnable{
 
 
 
-
-
 ### 1.1 问题的原因
 
 这是因为多线程的一个安全性问题，那就是`count++`的操作它并不是原子性的。
