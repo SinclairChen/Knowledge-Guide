@@ -13,6 +13,7 @@
 3. **[可见性、有序性问题](docs/java/并发/可见性、有序性问题.md)**
 4. **[JMM与happens-before原则](docs/java/并发/JMM与hapens-before原则.md)**
 5. **[AQS源码分析](docs/java/并发/AQS源码分析.md)**
+6. **[Lock与ReentrantLock源码分析](docs/java/并发/Lock与ReentrantLock源码分析.md)**
 
 **其他**
 
