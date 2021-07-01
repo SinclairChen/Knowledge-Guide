@@ -1,4 +1,4 @@
-## 1. AQS
+## 1. AQS简介
 
 AQS，全称`AbstractQueuedSynchronizer`，它是一个同步工具也是Lock用来实现线程同步的核心组件。
 
@@ -99,7 +99,7 @@ static final class Node {
 
 #### 1.3.1 acquire(int)
 
-这个方法是处于独占模式下的线程获取共享资源的顶层入口，
+这个方法是线程获取共享资源的顶层入口
 
 ```java
 public final void acquire(int arg) {
@@ -129,7 +129,7 @@ protected boolean tryAcquire(int arg) {
 }
 ```
 
-在AQS里，这个方法没有实现，具体的实现实现是通过下面你的子类同步器去实现的。对于为什么没有将这个方法没有设置为abstract的，可以查看[AbstractQueuedSynchronizer中的tryAcquire为什么没有设置为抽象方法](https://starrevolve.com/#/docs/java/%E5%B9%B6%E5%8F%91/AbstractQueuedSynchronizer%E4%B8%AD%E7%9A%84tryAcquire%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%9C%89%E8%AE%BE%E7%BD%AE%E4%B8%BA%E6%8A%BD%E8%B1%A1%E6%96%B9%E6%B3%95)这篇文章。
+在AQS里，这个方法没有实现，具体的实现是子类同步器去实现的。对于为什么没有将这个方法没有设置为abstract的，可以查看[AbstractQueuedSynchronizer中的tryAcquire为什么没有设置为抽象方法](https://starrevolve.com/#/docs/java/%E5%B9%B6%E5%8F%91/AbstractQueuedSynchronizer%E4%B8%AD%E7%9A%84tryAcquire%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%9C%89%E8%AE%BE%E7%BD%AE%E4%B8%BA%E6%8A%BD%E8%B1%A1%E6%96%B9%E6%B3%95)这篇文章。
 
 
 
