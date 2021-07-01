@@ -99,7 +99,7 @@ static final class Node {
 
 #### 1.3.1 acquire(int)
 
-这个方法是线程获取共享资源的顶层入口
+这个方法是线程获取`独占锁`共享资源的顶层入口
 
 ```java
 public final void acquire(int arg) {
