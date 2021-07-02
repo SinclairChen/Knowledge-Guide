@@ -95,7 +95,7 @@ public class ConditionDemo {
 
 #### 1.1.1 await
 
-```
+```java
 public final void await() throws InterruptedException {
 	//判断线程是否中断
     if (Thread.interrupted())
@@ -279,9 +279,9 @@ public final void signal() {
 
 这是一个接口，由具体的实现
 
-```
+```java
 protected boolean isHeldExclusively() {
-throw new UnsupportedOperationException();
+    throw new UnsupportedOperationException();
 }
 ```
 
@@ -323,4 +323,3 @@ final boolean transferForSignal(Node node) {
     return true;
 }
 ```
-
