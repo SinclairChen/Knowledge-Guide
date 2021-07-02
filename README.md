@@ -14,6 +14,7 @@
 4. **[JMM与happens-before原则](docs/java/并发/JMM与hapens-before原则.md)**
 5. **[AQS源码分析](docs/java/并发/AQS源码分析.md)**
 6. **[Lock与ReentrantLock源码分析](docs/java/并发/Lock与ReentrantLock源码分析.md)**
+7. **[Condition源码分析](docs/java/并发/Condition源码分析.md)**
 
 **其他**
 
