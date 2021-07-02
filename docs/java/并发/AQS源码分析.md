@@ -172,6 +172,8 @@ private Node addWaiter(Node mode) {
 
 #### 1.3.4 enq（Node）
 
+添加线程节点到同步队列
+
 ```java
 private Node enq(final Node node) {
     
