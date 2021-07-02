@@ -114,7 +114,7 @@ public final void acquire(int arg) {
 **流程：**
 
 1. 通过tryAcquire尝试获取锁，如果成功返回true，如果失败返回false
-2. 通过addWaiter将该线程加入等待队列
+2. 通过addWaiter将该线程加入同步队列
 3. acquireQueued，将Node作为参数，通过自旋尝试获取锁
 
 
@@ -135,7 +135,7 @@ protected boolean tryAcquire(int arg) {
 
 #### 1.3.3 addWaiter(Node)
 
-这个方法是把当前线程封装成一个Node节点，并将这个节点添加到等待队列的尾部
+这个方法是把当前线程封装成一个Node节点，并将这个节点添加到同步等待队列的尾部
 
 ```java
 private Node addWaiter(Node mode) {
@@ -245,7 +245,7 @@ final boolean acquireQueued(final Node node, int arg) {
     } finally {
         //如果在等待的过程中线程一直没有获取到锁
         //线程可能被中断了，或者超时了
-        //就需要将他从等待队列中移除
+        //就需要将他从同步等待队列中移除
         if (failed)
             cancelAcquire(node);
     }
@@ -336,7 +336,7 @@ public final boolean release(int arg) {
 **流程：**
 
 1. 尝试释放锁
-2. 如果锁释放成功，需要唤醒在等待队列中下一个等待的线程
+2. 如果锁释放成功，需要唤醒在等地啊中下一个等待的线程
 
 
 
