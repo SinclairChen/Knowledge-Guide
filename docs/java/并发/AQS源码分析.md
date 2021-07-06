@@ -95,7 +95,23 @@ static final class Node {
 
 
 
-### 1.3 AQS抢占锁的源码分析
+#### 1.2.2 predecessor()
+
+获取前置节点
+
+```java
+final Node predecessor() throws NullPointerException {
+    Node p = prev;
+    if (p == null)
+        throw new NullPointerException();
+    else
+        return p;
+}
+```
+
+
+
+### 1.3 AQS独占锁抢占锁的源码分析
 
 #### 1.3.1 acquire(int)
 
@@ -315,7 +331,7 @@ private final boolean parkAndCheckInterrupt() {
 
 
 
-### 1.4 AQS释放锁的源码分析
+### 1.4 AQS独占锁释放锁的源码分析
 
 #### 1.4.1 release(int)
 
@@ -377,6 +393,157 @@ private void unparkSuccessor(Node node) {
     //如果有下一个节点，唤醒下一个节点的线程
     if (s != null)
         LockSupport.unpark(s.thread);
+}
+```
+
+
+
+### 1.5 AQS共享锁抢占锁的源码分析
+
+#### 1.5.1 acquireShared(int)
+
+获取共享锁的顶层入口
+
+```java
+public final void acquireShared(int arg) {
+    if (tryAcquireShared(arg) < 0)
+        doAcquireShared(arg);
+}
+```
+
+
+
+#### 1.5.2 tryAcquireShared(int)
+
+尝试获取共享锁，如果获取成功返回true，如果获取失败返回false。和tryAcquire一样，具体的由子类同步器实现。
+
+```java
+protected int tryAcquireShared(int arg) {
+    throw new UnsupportedOperationException();
+}
+```
+
+
+
+#### 1.5.3 doAcquireShared(int)
+
+```java
+private void doAcquireShared(int arg) {
+    //将共享节点添加到队尾
+    final Node node = addWaiter(Node.SHARED);
+    //添加成功标记
+    boolean failed = true;
+    try {
+        //中断标记
+        boolean interrupted = false;
+        //自旋
+        for (;;) {
+            //获取前置节点
+            final Node p = node.predecessor();
+            //如果前置节点是head节点，尝试获取共享锁
+            if (p == head) {
+                int r = tryAcquireShared(arg);
+                if (r >= 0) {
+                    setHeadAndPropagate(node, r);
+                    //回收前置节点
+                    p.next = null; // help GC
+                    //判断是否中断过，如果中断过，中断线程
+                    if (interrupted)
+                        selfInterrupt();
+                    failed = false;
+                    return;
+                }
+            }
+            
+            if (shouldParkAfterFailedAcquire(p, node) &&
+                parkAndCheckInterrupt())
+                interrupted = true;
+        }
+    } finally {
+        //移除节点
+        if (failed)
+            cancelAcquire(node);
+    }
+}
+```
+
+
+
+#### 1.5.4setHeadAndPropagate(int)
+
+```
+private void setHeadAndPropagate(Node node, int propagate) {
+
+		//将自己设置为head节点
+        Node h = head; // Record old head for check below
+        setHead(node);
+       	//如果还有后继节点，继续唤醒后继节点
+       	//如果没有后续节点，释放共享锁
+        if (propagate > 0 || h == null || h.waitStatus < 0 ||
+            (h = head) == null || h.waitStatus < 0) {
+            Node s = node.next;
+            if (s == null || s.isShared())
+                doReleaseShared();
+        }
+    }
+```
+
+
+
+### 1.6 AQS共享锁释放锁的源码分析
+
+#### 1.6.1 releaseShared(int)
+
+释放共享锁的顶层入口
+
+```java
+public final boolean releaseShared(int arg) {
+    if (tryReleaseShared(arg)) {
+        doReleaseShared();
+        return true;
+    }
+    return false;
+}
+```
+
+
+
+#### 1.6.2 tryReleaseShared(int)
+
+尝试释放共享锁
+
+```java
+protected boolean tryReleaseShared(int arg) {
+    throw new UnsupportedOperationException();
+}
+```
+
+
+
+#### 1.6.3 doReleaseShared(int)
+
+```java
+private void doReleaseShared() {
+	
+    for (;;) {
+        Node h = head;
+        //如果节点存在并且不是tail节点，获取线程节点的状态，并且更新节点的状态
+        //如果节点状态更新成功，释放锁成功，并唤醒后继节点
+        //如果节点状态更新失败，跳过这个节点
+        if (h != null && h != tail) {
+            int ws = h.waitStatus;
+            if (ws == Node.SIGNAL) {
+                if (!compareAndSetWaitStatus(h, Node.SIGNAL, 0))
+                    continue;            // loop to recheck cases
+                unparkSuccessor(h);
+            }
+            else if (ws == 0 &&
+                     !compareAndSetWaitStatus(h, 0, Node.PROPAGATE))
+                continue;                // loop on failed CAS
+        }
+        if (h == head)                   // loop if head changed
+            break;
+    }
 }
 ```
 
