@@ -471,21 +471,21 @@ private void doAcquireShared(int arg) {
 
 #### 1.5.4setHeadAndPropagate(int)
 
-```
+```java
 private void setHeadAndPropagate(Node node, int propagate) {
 
-		//将自己设置为head节点
-        Node h = head; // Record old head for check below
-        setHead(node);
-       	//如果还有后继节点，继续唤醒后继节点
-       	//如果没有后续节点，释放共享锁
-        if (propagate > 0 || h == null || h.waitStatus < 0 ||
-            (h = head) == null || h.waitStatus < 0) {
-            Node s = node.next;
-            if (s == null || s.isShared())
-                doReleaseShared();
-        }
+    //将自己设置为head节点
+    Node h = head; // Record old head for check below
+    setHead(node);
+    //如果还有后继节点，继续唤醒后继节点
+    //如果没有后续节点，释放共享锁
+    if (propagate > 0 || h == null || h.waitStatus < 0 ||
+        (h = head) == null || h.waitStatus < 0) {
+        Node s = node.next;
+        if (s == null || s.isShared())
+            doReleaseShared();
     }
+}
 ```
 
 
