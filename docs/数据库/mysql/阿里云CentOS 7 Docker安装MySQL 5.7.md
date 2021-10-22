@@ -70,12 +70,12 @@ source ~/.bashrc
 进入MySQL客户端后执行命令：
 
 ```
-create user 'qingshan'@'%' identified by '123456';
+create user 'sinclair'@'%' identified by '123456';
 flush privileges;
 
 create database db0 DEFAULT CHARSET utf8mb4 COLLATE utf8mb4_general_ci;
 
-grant all privileges on db0.* to 'qingshan'@'%' identified by '123456';
+grant all privileges on db0.* to 'sinclair'@'%' identified by '123456';
 
 
 flush privileges;
@@ -84,7 +84,7 @@ flush privileges;
 8.0版本的授权语句不一样：
 
 ```
-grant all privileges on *.* to 'qingshan'@'localhost' with grant option;
+grant all privileges on *.* to 'sinclair'@'localhost' with grant option;
 ```
 
 5、配置安全组规则允许外网访问
