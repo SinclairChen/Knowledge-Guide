@@ -12,7 +12,7 @@ mkdir -p /usr/local/soft/redis/conf/
 mkdir -p /usr/local/soft/redis/data/
 ```
 
-复制 `redis.conf` 文件到主机/usr/local/soft/redis/conf/目录下（这个配置文件可以在官网redis.io下载的压缩包中找到）。
+复制 `redis.conf` 文件到主机/usr/local/soft/redis/conf/目录下（[redis.conf](https://raw.githubusercontent.com/antirez/redis/4.0/redis.conf)）。
 
 **注意有两行配置要修改：**
 1. daemonize yes 这一行必须注释，否则无法启动
