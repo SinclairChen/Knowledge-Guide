@@ -89,7 +89,6 @@
 1. **[CentOS7 yum方式安装MySQL 5.7](docs/数据库/mysql/CentOS7%20yum方式安装MySQL%205.7.md)**
 2. **[阿里云CentOS 7 Docker安装MySQL 5.7](docs/数据库/mysql/阿里云CentOS%207%20Docker安装MySQL%205.7.md)**
 3. **[MySQL主从复制配置](docs/数据库/mysql/MySQL主从复制配置.md)**
-4. **[MySQL中的锁](docs/数据库/mysql/MySQL中的锁.md)**
 
 
 **原理**
@@ -97,7 +96,7 @@
 1. **[一条查询语句在MySQL中到底是如何执行的？](docs/数据库/mysql/一条查询语句在MySQL中到底是如何执行的？.md)**
 2. **[一条更新语句在MySQL是如何执行的？](docs/数据库/mysql/一条更新语句在MySQL是如何执行的？.md)**
 3. **[数据库的事务及MVCC详解](docs/数据库/mysql/数据库的事务及MVCC详解.md)**
-
+4. **[MySQL中的锁](docs/数据库/mysql/MySQL中的锁.md)**
 
 
 ### ElasticSearch
