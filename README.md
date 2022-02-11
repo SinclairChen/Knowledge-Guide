@@ -89,6 +89,7 @@
 1. **[CentOS7 yum方式安装MySQL 5.7](docs/数据库/mysql/CentOS7%20yum方式安装MySQL%205.7.md)**
 2. **[阿里云CentOS 7 Docker安装MySQL 5.7](docs/数据库/mysql/阿里云CentOS%207%20Docker安装MySQL%205.7.md)**
 3. **[MySQL主从复制配置](docs/数据库/mysql/MySQL主从复制配置.md)**
+3. **[MySQL中的锁](docs/数据库/mysql/MySQL中的锁.md)**
 
 
 **原理**
