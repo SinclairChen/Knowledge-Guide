@@ -55,7 +55,7 @@ redis>info replication
 
 
 
-![image-20210525150159323](image/image-20210525150159323.png)
+![image-20220211091935520](image/image-20220211091935520.png)
 
 
 
