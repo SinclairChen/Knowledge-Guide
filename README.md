@@ -97,6 +97,9 @@
 2. **[一条更新语句在MySQL是如何执行的？](docs/数据库/mysql/一条更新语句在MySQL是如何执行的？.md)**
 3. **[数据库的事务及MVCC详解](docs/数据库/mysql/数据库的事务及MVCC详解.md)**
 4. **[MySQL中的锁](docs/数据库/mysql/MySQL中的锁.md)**
+5. **[MySQL中的索引以及存储模型推演](docs/数据库/mysql/MySQL中的索引以及存储模型推演.md)**
+6. **[B+树在MySQL中的落地](docs/数据库/mysql/B+树在MySQL中的落地.md)**
+7. **[索引的创建、使用以及原则](docs/数据库/mysql/索引的创建、使用以及原则.md)**
 
 
 ### ElasticSearch
