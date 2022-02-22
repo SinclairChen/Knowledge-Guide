@@ -98,6 +98,7 @@
 5. **[MySQL中的索引以及存储模型推演](docs/数据库/mysql/MySQL中的索引以及存储模型推演.md)**
 6. **[B+树在MySQL中的落地](docs/数据库/mysql/B+树在MySQL中的落地.md)**
 7. **[索引的创建、使用以及原则](docs/数据库/mysql/索引的创建、使用以及原则.md)**
+8. **[SQL语句分析与优化](docs/数据库/mysql/SQL语句分析与优化.md)**
 
 
 ### ElasticSearch
