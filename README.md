@@ -33,7 +33,7 @@
 1. **[为什么要使用Mybatis](docs/java/框架/mybatis/为什么要使用Mybatis.md)**
 2. **[Mybatis的基本使用](docs/java/框架/mybatis/Mybatis的基本使用.md)**
 3. **[Mybatis的进阶使用](docs/java/框架/mybatis/Mybatis的进阶使用.md)**
-4. **[Mybatis工作流程、架构划分与模块分层.md](docs/java/框架/mybatis/Mybatis工作流程、架构划分与模块分层.md)**
+4. **[Mybatis工作流程、架构划分与模块分层](docs/java/框架/mybatis/Mybatis工作流程、架构划分与模块分层.md)**
 5. **[Mybatis缓存详解](docs/java/框架/mybatis/Mybatis缓存详解.md)**
 6. **[Mybatis源码分析](docs/java/框架/mybatis/Mybatis源码分析.md)**
 7. **[Mybatis插件原理与如何自定义插件](docs/java/框架/mybatis/Mybatis插件原理与如何自定义插件.md)**
