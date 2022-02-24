@@ -199,10 +199,15 @@ BITTOP "AND" "7_days_both_online_users" "day_1_online_users" "day_2_online_users
 
 ```c
 typedef struct dictEntry {
-void *key; /* key 关键字定义   */ union {
-void *val;                 uint64_t u64; /* value  定义   */ int64_t s64;                 double d;
-} v;
-struct dictEntry *next; /*   指向下一个键值对节点   */ } dictEntry;
+	void *key; /* key 关键字定义   */ 
+    union {
+		void *val;
+        uint64_t u64; /* value  定义   */ 
+        int64_t s64; 
+        double d;
+	} v;
+	struct dictEntry *next; /*   指向下一个键值对节点   */ 
+} dictEntry;
 ```
 
 
