@@ -1,7 +1,6 @@
 # 问题：pom.xml中dependency突然变成红色，所有相关代码都找不到依赖，就像这样：
 ![20200620_105405.png](image/5a83792e70a14400931e757b1ce60302.png)
 
-![20200618_152712.png](image/9eea92d6a2234f1da249cd7c08614510.png)
 
 reimport会报错，无法下载：
 ![20200618_152540.png](image/1a6e7ba2e847449fb3a50d0adbbaf23e.png)
@@ -10,7 +9,7 @@ reimport会报错，无法下载：
 Could not transfer artifact org.springframework.boot:spring-boot-starter-parent:pom:2.1.5.RELEASE from/to alimaven (http://maven.aliyun.com/nexus/content/groups/public/): sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
 ```
 
-这不科学啊，用IDEA创建的Spring Boot工程，这个依赖能错？
+用IDEA创建的Spring Boot工程，这个依赖能错？
 
 conf/settings.xml检查过了没什么问题。
 难道是aliyun的镜像仓库里面没有这个包导致下载不到？肯定不可能，不然谁还敢用aliyun maven仓库？用GAV方式搜索包也确实存在。
