@@ -659,16 +659,6 @@ protected Object createBean(String beanName, RootBeanDefinition mbd, @Nullable O
 /**
  * 创建Bean的实例对象
  *
- * Create a new instance for the specified bean, using an appropriate instantiation strategy:
- * factory method, constructor autowiring, or simple instantiation.
- * @param beanName the name of the bean
- * @param mbd the bean definition for the bean
- * @param args explicit arguments to use for constructor or factory method invocation
- * @return a BeanWrapper for the new instance
- * @see #obtainFromSupplier
- * @see #instantiateUsingFactoryMethod
- * @see #autowireConstructor
- * @see #instantiateBean
  */
 protected BeanWrapper createBeanInstance(String beanName, RootBeanDefinition mbd, @Nullable Object[] args) {
    // Make sure bean class is actually resolved at this point.
@@ -741,10 +731,6 @@ protected BeanWrapper createBeanInstance(String beanName, RootBeanDefinition mbd
 /**
  * 使用默认的无参构造方法实例化Bean对象
  *
- * Instantiate the given bean using its default constructor.
- * @param beanName the name of the bean
- * @param mbd the bean definition for the bean
- * @return a BeanWrapper for the new instance
  */
 protected BeanWrapper instantiateBean(final String beanName, final RootBeanDefinition mbd) {
    try {
