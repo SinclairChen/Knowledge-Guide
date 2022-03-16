@@ -18,7 +18,7 @@
 
 **其他**
 
-- [AbstractQueuedSynchronizer中的tryAcquire为什么没有设置为抽象方法](docs/java/并发/AbstractQueuedSynchronizer中的tryAcquire为什么没有设置为抽象方法.md)
+- **[AbstractQueuedSynchronizer中的tryAcquire为什么没有设置为抽象方法](docs/java/并发/AbstractQueuedSynchronizer中的tryAcquire为什么没有设置为抽象方法.md)**
 
 
 
