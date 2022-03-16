@@ -949,4 +949,4 @@ public void registerBeanDefinition(String beanName, BeanDefinition beanDefinitio
 }
 ```
 
-到此为止IOC容器中已经建立了所有的Bean定义信息，这些定义信息已经可以被使用、检索。这些被注册的Bean定义信息，真是IOC控制反转的基础。
+到此为止IOC容器中已经建立了所有的Bean定义信息，这些定义信息已经可以被使用、检索。这些被注册的Bean定义信息，这是IOC容器控制反转的基础。
