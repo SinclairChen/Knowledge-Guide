@@ -831,3 +831,426 @@ public Object instantiate(RootBeanDefinition bd, @Nullable String beanName, Bean
 
 
 
+## 8、 使用Bean的构造方法进行实例化
+
+### 8.1 获取构造器
+
+调用AbstractAutowireCapableBeanFactory.determineConstructorsFromBeanPostProcessors()方法：
+
+```java
+protected Constructor<?>[] determineConstructorsFromBeanPostProcessors(@Nullable Class<?> beanClass, String beanName)
+      throws BeansException {
+
+   if (beanClass != null && hasInstantiationAwareBeanPostProcessors()) {
+      for (BeanPostProcessor bp : getBeanPostProcessors()) {
+         if (bp instanceof SmartInstantiationAwareBeanPostProcessor) {
+            SmartInstantiationAwareBeanPostProcessor ibp = (SmartInstantiationAwareBeanPostProcessor) bp;
+            //这个方式最终还是通过调用bean后置处理器的实现类来完成的
+             Constructor<?>[] ctors = ibp.determineCandidateConstructors(beanClass, beanName);
+            if (ctors != null) {
+               return ctors;
+            }
+         }
+      }
+   }
+   return null;
+}
+```
+
+
+
+### 8.2  使用Bean后置处理器选择合适的构造方法
+
+这里我们调用AutowiredAnnotationBeanPostProcessor.determineCandidateConstructors()方法来实现：
+
+```
+//为自动依赖注入装配Bean选择合适的构造方法
+@Override
+@Nullable
+public Constructor<?>[] determineCandidateConstructors(Class<?> beanClass, final String beanName)
+      throws BeanCreationException {
+
+   // Let's check for lookup methods here..
+   if (!this.lookupMethodsChecked.contains(beanName)) {
+      try {
+         ReflectionUtils.doWithMethods(beanClass, method -> {
+            Lookup lookup = method.getAnnotation(Lookup.class);
+            if (lookup != null) {
+               Assert.state(beanFactory != null, "No BeanFactory available");
+               LookupOverride override = new LookupOverride(method, lookup.value());
+               try {
+                  RootBeanDefinition mbd = (RootBeanDefinition) beanFactory.getMergedBeanDefinition(beanName);
+                  mbd.getMethodOverrides().addOverride(override);
+               }
+               catch (NoSuchBeanDefinitionException ex) {
+                  throw new BeanCreationException(beanName,
+                     "Cannot apply @Lookup to beans without corresponding bean definition");
+               }
+            }
+         });
+      }
+      catch (IllegalStateException ex) {
+         throw new BeanCreationException(beanName, "Lookup method resolution failed", ex);
+      }
+      this.lookupMethodsChecked.add(beanName);
+   }
+
+   //首先从容器的缓存中查找是否有指定Bean的构造方法
+   // Quick check on the concurrent map first, with minimal locking.
+   Constructor<?>[] candidateConstructors = this.candidateConstructorsCache.get(beanClass);
+   if (candidateConstructors == null) {
+      // Fully synchronized resolution now...
+      //线程同步以确保容器中数据一致性
+      synchronized (this.candidateConstructorsCache) {
+         candidateConstructors = this.candidateConstructorsCache.get(beanClass);
+         if (candidateConstructors == null) {
+            Constructor<?>[] rawCandidates;
+            try {
+               //通过JDK反射机制，获取指定类的中所有声明的构造方法
+               rawCandidates = beanClass.getDeclaredConstructors();
+            }
+            catch (Throwable ex) {
+               throw new BeanCreationException(beanName,
+                     "Resolution of declared constructors on bean Class [" + beanClass.getName() +
+                     "] from ClassLoader [" + beanClass.getClassLoader() + "] failed", ex);
+            }
+            //存放候选构造方法的集合
+            List<Constructor<?>> candidates = new ArrayList<Constructor<?>>(rawCandidates.length);
+            
+            //autowire注解中required属性指定的构造方法
+            Constructor<?> requiredConstructor = null;
+            
+            //默认的构造方法
+            Constructor<?> defaultConstructor = null;
+            
+            //主构造方法
+            Constructor<?> primaryConstructor = BeanUtils.findPrimaryConstructor(beanClass);
+            int nonSyntheticConstructors = 0;
+            
+            //遍历所有的构造方法，检查是否添加了autowire注解，以及是否指定了required属性
+            for (Constructor<?> candidate : rawCandidates) {
+               if (!candidate.isSynthetic()) {
+                  nonSyntheticConstructors++;
+               }
+               else if (primaryConstructor != null) {
+                  continue;
+               }
+               
+               //获取指定类中所有关于autowire的注解(Annotation)
+               AnnotationAttributes ann = findAutowiredAnnotation(candidate);
+               
+               //如果指定类中没有antowire的注解
+               if (ann == null) {
+                  Class<?> userClass = ClassUtils.getUserClass(beanClass);
+                  if (userClass != beanClass) {
+                     try {
+                        Constructor<?> superCtor =
+                              userClass.getDeclaredConstructor(candidate.getParameterTypes());
+                        ann = findAutowiredAnnotation(superCtor);
+                     }
+                     catch (NoSuchMethodException ex) {
+                        // Simply proceed, no equivalent superclass constructor found...
+                     }
+                  }
+               }
+               
+               //如果指定类中有关于antowire的注解
+               if (ann != null) {
+                  //如果antowire注解中指定了required属性
+                  if (requiredConstructor != null) {
+                     throw new BeanCreationException(beanName,
+                           "Invalid autowire-marked constructor: " + candidate +
+                           ". Found constructor with 'required' Autowired annotation already: " +
+                           requiredConstructor);
+                  }
+                  
+                  //获取autowire注解中required属性值
+                  boolean required = determineRequiredStatus(ann);
+                  
+                  //如果获取到autowire注解中required的属性值
+                  if (required) {
+                     
+                     //如果候选构造方法集合不为空
+                     if (!candidates.isEmpty()) {
+                        throw new BeanCreationException(beanName,
+                              "Invalid autowire-marked constructors: " + candidates +
+                              ". Found constructor with 'required' Autowired annotation: " +
+                              candidate);
+                     }
+                     
+                     //当前的构造方法就是required属性所配置的构造方法
+                     requiredConstructor = candidate;
+                  }
+                  
+                  //将当前的构造方法添加到候选构造方法集合中
+                  candidates.add(candidate);
+               }
+               
+               //如果autowire注解的参数列表为空
+               else if (candidate.getParameterCount() == 0) {
+                  defaultConstructor = candidate;
+               }
+            }
+            
+            //如果候选构造方法集合不为空
+            if (!candidates.isEmpty()) {
+               
+               // Add default constructor to list of optional constructors, as fallback.
+               //如果所有的构造方法都没有配置required属性，且有默认构造方法
+               if (requiredConstructor == null) {
+                  if (defaultConstructor != null) {
+                     
+                     //将默认构造方法添加到候选构造方法列表
+                     candidates.add(defaultConstructor);
+                  }
+                  else if (candidates.size() == 1 && logger.isWarnEnabled()) {
+                     logger.warn("Inconsistent constructor declaration on bean with name '" + beanName +
+                           "': single autowire-marked constructor flagged as optional - " +
+                           "this constructor is effectively required since there is no " +
+                           "default constructor to fall back to: " + candidates.get(0));
+                  }
+               }
+               
+               //将候选构造方法集合转换为数组
+               candidateConstructors = candidates.toArray(new Constructor<?>[candidates.size()]);
+            }
+            else if (rawCandidates.length == 1 && rawCandidates[0].getParameterCount() > 0) {
+               candidateConstructors = new Constructor<?>[] {rawCandidates[0]};
+            }
+            else if (nonSyntheticConstructors == 2 && primaryConstructor != null && defaultConstructor != null) {
+               candidateConstructors = new Constructor<?>[] {primaryConstructor, defaultConstructor};
+            }
+            else if (nonSyntheticConstructors == 1 && primaryConstructor != null) {
+               candidateConstructors = new Constructor<?>[] {primaryConstructor};
+            }
+            else {
+               
+               //如果候选构造方法集合为空，则创建一个空的数组
+               candidateConstructors = new Constructor<?>[0];
+            }
+            
+            //将类的候选构造方法集合存放到容器的缓存中
+            this.candidateConstructorsCache.put(beanClass, candidateConstructors);
+         }
+      }
+   }
+   
+   //返回指定类的候选构造方法数组，如果没有返回null
+   return (candidateConstructors.length > 0 ? candidateConstructors : null);
+}
+```
+
+
+
+### 8.3 确定构造器，创建对象
+
+调用ConstructorResolver.autowireConstructor()方法：
+
+```java
+public BeanWrapper autowireConstructor(final String beanName, final RootBeanDefinition mbd,
+      @Nullable Constructor<?>[] chosenCtors, @Nullable final Object[] explicitArgs) {
+
+   //创建一个BeanWrapperImpl对象，并完成初始化
+   BeanWrapperImpl bw = new BeanWrapperImpl();
+   this.beanFactory.initBeanWrapper(bw);
+
+   Constructor<?> constructorToUse = null;
+   ArgumentsHolder argsHolderToUse = null;
+   Object[] argsToUse = null;
+
+
+   //确定构造参数
+   //判断有没有通过getBean()的方式传入了，如果已经传入直接使用
+   if (explicitArgs != null) {
+      argsToUse = explicitArgs;
+   }
+   else {
+      //如果没有尝试从缓存中获取
+      Object[] argsToResolve = null;
+      synchronized (mbd.constructorArgumentLock) {
+
+         //从bean定义信息中获取构造函数或者工厂方法
+         constructorToUse = (Constructor<?>) mbd.resolvedConstructorOrFactoryMethod;
+         if (constructorToUse != null && mbd.constructorArgumentsResolved) {
+            // Found a cached constructor...
+            //如果有构造函数，从bean定义信息中获取准备好的参数
+            argsToUse = mbd.resolvedConstructorArguments;
+            if (argsToUse == null) {
+               argsToResolve = mbd.preparedConstructorArguments;
+            }
+         }
+      }
+      //解析这个从Bean定义信息中获取的参数
+      if (argsToResolve != null) {
+         argsToUse = resolvePreparedArguments(beanName, mbd, bw, constructorToUse, argsToResolve);
+      }
+   }
+
+   //如果没有构造函数
+   if (constructorToUse == null) {
+      // Need to resolve the constructor.
+      //需要解析构造函数
+      boolean autowiring = (chosenCtors != null ||
+            mbd.getResolvedAutowireMode() == RootBeanDefinition.AUTOWIRE_CONSTRUCTOR);
+      ConstructorArgumentValues resolvedValues = null;
+
+      int minNrOfArgs;
+      if (explicitArgs != null) {
+         minNrOfArgs = explicitArgs.length;
+      }
+      else {
+         ConstructorArgumentValues cargs = mbd.getConstructorArgumentValues();
+         resolvedValues = new ConstructorArgumentValues();
+         minNrOfArgs = resolveConstructorArguments(beanName, mbd, bw, cargs, resolvedValues);
+      }
+
+      // Take specified constructors, if any.
+      Constructor<?>[] candidates = chosenCtors;
+      if (candidates == null) {
+         Class<?> beanClass = mbd.getBeanClass();
+         try {
+            candidates = (mbd.isNonPublicAccessAllowed() ?
+                  beanClass.getDeclaredConstructors() : beanClass.getConstructors());
+         }
+         catch (Throwable ex) {
+            throw new BeanCreationException(mbd.getResourceDescription(), beanName,
+                  "Resolution of declared constructors on bean Class [" + beanClass.getName() +
+                  "] from ClassLoader [" + beanClass.getClassLoader() + "] failed", ex);
+         }
+      }
+      //排序构造函数
+      AutowireUtils.sortConstructors(candidates);
+      int minTypeDiffWeight = Integer.MAX_VALUE;
+      Set<Constructor<?>> ambiguousConstructors = null;
+      LinkedList<UnsatisfiedDependencyException> causes = null;
+
+      //迭代所有构造器
+      for (Constructor<?> candidate : candidates) {
+         //获取构造函数参数类型
+         Class<?>[] paramTypes = candidate.getParameterTypes();
+
+         if (constructorToUse != null && argsToUse.length > paramTypes.length) {
+            // Already found greedy constructor that can be satisfied ->
+            // do not look any further, there are only less greedy constructors left.
+            break;
+         }
+         if (paramTypes.length < minNrOfArgs) {
+            continue;
+         }
+
+         //参数持有者对象，用来保存参数
+         ArgumentsHolder argsHolder;
+         if (resolvedValues != null) {
+            try {
+               String[] paramNames = ConstructorPropertiesChecker.evaluate(candidate, paramTypes.length);
+               if (paramNames == null) {
+                  ParameterNameDiscoverer pnd = this.beanFactory.getParameterNameDiscoverer();
+                  if (pnd != null) {
+                     paramNames = pnd.getParameterNames(candidate);
+                  }
+               }
+
+               //根据构造函数和参数创建ArgumentHolder对象
+               argsHolder = createArgumentArray(beanName, mbd, resolvedValues, bw, paramTypes, paramNames,
+                     getUserDeclaredConstructor(candidate), autowiring);
+            }
+            catch (UnsatisfiedDependencyException ex) {
+               if (this.beanFactory.logger.isTraceEnabled()) {
+                  this.beanFactory.logger.trace(
+                        "Ignoring constructor [" + candidate + "] of bean '" + beanName + "': " + ex);
+               }
+               // Swallow and try next constructor.
+               if (causes == null) {
+                  causes = new LinkedList<>();
+               }
+               causes.add(ex);
+               continue;
+            }
+         }
+         else {
+            // Explicit arguments given -> arguments length must match exactly.
+            if (paramTypes.length != explicitArgs.length) {
+               continue;
+            }
+
+            //根据explicitArgs创建ArgumentsHolder对象
+            argsHolder = new ArgumentsHolder(explicitArgs);
+         }
+
+         //isLenientConstructorResolution()：判断在宽松还是严格模式下解析构造函数
+         //typeDiffWeight：类型差异权重
+         int typeDiffWeight = (mbd.isLenientConstructorResolution() ?
+               argsHolder.getTypeDifferenceWeight(paramTypes) : argsHolder.getAssignabilityWeight(paramTypes));
+
+         // Choose this constructor if it represents the closest match.
+         //选择当前最接近的匹配规则作为构造函数
+         if (typeDiffWeight < minTypeDiffWeight) {
+            constructorToUse = candidate;
+            argsHolderToUse = argsHolder;
+            argsToUse = argsHolder.arguments;
+            minTypeDiffWeight = typeDiffWeight;
+            ambiguousConstructors = null;
+         }
+         else if (constructorToUse != null && typeDiffWeight == minTypeDiffWeight) {
+            if (ambiguousConstructors == null) {
+               ambiguousConstructors = new LinkedHashSet<>();
+               ambiguousConstructors.add(constructorToUse);
+            }
+            ambiguousConstructors.add(candidate);
+         }
+      }
+
+      //没有构造函数或者工厂方法，抛出异常
+      if (constructorToUse == null) {
+         if (causes != null) {
+            UnsatisfiedDependencyException ex = causes.removeLast();
+            for (Exception cause : causes) {
+               this.beanFactory.onSuppressedException(cause);
+            }
+            throw ex;
+         }
+         throw new BeanCreationException(mbd.getResourceDescription(), beanName,
+               "Could not resolve matching constructor " +
+               "(hint: specify index/type/name arguments for simple parameters to avoid type ambiguities)");
+      }
+      else if (ambiguousConstructors != null && !mbd.isLenientConstructorResolution()) {
+         throw new BeanCreationException(mbd.getResourceDescription(), beanName,
+               "Ambiguous constructor matches found in bean '" + beanName + "' " +
+               "(hint: specify index/type/name arguments for simple parameters to avoid type ambiguities): " +
+               ambiguousConstructors);
+      }
+
+      if (explicitArgs == null) {
+         argsHolderToUse.storeCache(mbd, constructorToUse);
+      }
+   }
+
+   try {
+      //获取实例化策略
+      final InstantiationStrategy strategy = beanFactory.getInstantiationStrategy();
+      Object beanInstance;
+
+      if (System.getSecurityManager() != null) {
+         final Constructor<?> ctorToUse = constructorToUse;
+         final Object[] argumentsToUse = argsToUse;
+
+         //使用策略创建bean对象
+         beanInstance = AccessController.doPrivileged((PrivilegedAction<Object>) () ->
+               strategy.instantiate(mbd, beanName, beanFactory, ctorToUse, argumentsToUse),
+               beanFactory.getAccessControlContext());
+      }
+      else {
+         //使用策略创建bean对象
+         beanInstance = strategy.instantiate(mbd, beanName, this.beanFactory, constructorToUse, argsToUse);
+      }
+
+      //设置到beanWrapper中，返回
+      bw.setBeanInstance(beanInstance);
+      return bw;
+   }
+   catch (Throwable ex) {
+      throw new BeanCreationException(mbd.getResourceDescription(), beanName,
+            "Bean instantiation via constructor failed", ex);
+   }
+}
+```
