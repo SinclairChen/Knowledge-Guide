@@ -863,7 +863,7 @@ protected Constructor<?>[] determineConstructorsFromBeanPostProcessors(@Nullable
 
 这里我们调用AutowiredAnnotationBeanPostProcessor.determineCandidateConstructors()方法来实现：
 
-```
+```java
 //为自动依赖注入装配Bean选择合适的构造方法
 @Override
 @Nullable
