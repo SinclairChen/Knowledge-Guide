@@ -32,7 +32,7 @@
 1. **[基于XML的IOC容器初始化分析--加载资源并转换成Document对象](docs/java/框架/spring/基于XML的IOC容器初始化分析--加载资源并转换成Document对象.md)**
 2. **[基于XML的IOC容器初始化分析--解析Document对象并完成注册](docs/java/框架/spring/基于XML的IOC容器初始化分析--解析Document对象并完成注册.md)**
 3. **[IOC容器实例化Bean分析--创建Bean实例](docs/java/框架/spring/IOC容器实例化Bean分析--创建Bean实例.md)**
-
+4. **[IOC容器实例化Bean分析--Bean的属性注入](docs/java/框架/spring/IOC容器实例化Bean分析--Bean的属性注入.md)**
 
 
 ### Mybatis
