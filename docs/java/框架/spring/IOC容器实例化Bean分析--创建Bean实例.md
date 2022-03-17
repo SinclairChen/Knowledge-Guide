@@ -671,6 +671,8 @@ protected BeanWrapper createBeanInstance(String beanName, RootBeanDefinition mbd
             "Bean class isn't public, and non-public access not allowed: " + beanClass.getName());
    }
 
+    //获取instanceSupplier属性
+    //代替工厂方法（包含静态工厂）或者构造器创建
    Supplier<?> instanceSupplier = mbd.getInstanceSupplier();
    if (instanceSupplier != null) {
       return obtainFromSupplier(instanceSupplier, beanName);
@@ -744,7 +746,7 @@ protected BeanWrapper instantiateBean(final String beanName, final RootBeanDefin
                getAccessControlContext());
       }
       else {
-         //将实例化的对象封装起来
+         //获取实例化策略，通过策略将实例化对象
          beanInstance = getInstantiationStrategy().instantiate(mbd, beanName, parent);
       }
       BeanWrapper bw = new BeanWrapperImpl(beanInstance);
