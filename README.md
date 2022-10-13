@@ -175,6 +175,7 @@
 
 1. **[CentOS7安装Zookeeper](docs/分布式/zookeeper/CentOS7安装Zookeeper.md)**
 2. **[zookeeper 集群搭建](docs/分布式/zookeeper/zookeeper%20集群搭建.md)**
+3. **[初识zookeeper](docs/分布式/zookeeper/初识zookeeper.md)**
 
 
 
